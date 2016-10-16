@@ -1,0 +1,14 @@
+#items
+item.gtveinlocator.veinLocator.name=GT Vein-Locator
+item.gtveinlocator.advancedVeinLocator.name=Advanced GT Vein-Locator
+
+#waypoint for journeymap
+waypoint.unknown.name=Unknown
+
+#chat messages
+chat.switch_range=The searching range has been set to %d*%d.
+chat.showing_message=The nearby %d veins' coordinates are:
+chat.count_info=%d waypoints have been added to JournayMap!
+
+#creative tab
+itemGroup.GTVeinLocator=GregTech Vein-Locator
