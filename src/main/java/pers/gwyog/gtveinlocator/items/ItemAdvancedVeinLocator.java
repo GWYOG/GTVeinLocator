@@ -10,6 +10,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import pers.gwyog.gtveinlocator.compat.JourneyMapHelper;
 import pers.gwyog.gtveinlocator.compat.XaeroMinimapHelper;
+import pers.gwyog.gtveinlocator.config.ModConfig;
 
 public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 
@@ -53,12 +54,12 @@ public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 					switch (this.supportMod) {
 					case journeymap:
 						if (!JourneyMapHelper.isWaypointExist(targetX, targetZ, dimId))
-							if(JourneyMapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, 64, targetZ, dimId))
+							if(JourneyMapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, ModConfig.waypointYLevelForJourneyMap, targetZ, dimId))
 								count++;
 						break;
 					case XaeroMinimap:
 						if (!XaeroMinimapHelper.isWaypointExist(targetX, targetZ))
-							if(XaeroMinimapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, 64, targetZ))
+							if(XaeroMinimapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, ModConfig.waypointYLevelForXaeroMinimap, targetZ))
 								count++;
 						break;
 					}
