@@ -16,7 +16,7 @@ import net.minecraft.item.Item;
 public class GTVeinLocator {	
 	public static final String MODID = "gtveinlocator";
 	public static final String MODNAME = "GT Vein-Locator";
-	public static final String VERSION = "v1.0.0";
+	public static final String VERSION = "v1.0.1";
 	
     @SidedProxy(clientSide="pers.gwyog.gtveinlocator.proxies.ClientProxy", serverSide="pers.gwyog.gtveinlocator.proxies.ServerProxy")
     public static CommonProxy proxy;
