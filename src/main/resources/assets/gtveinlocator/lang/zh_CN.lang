@@ -8,7 +8,7 @@ waypoint.unknown.name=未知
 #chat messages
 chat.switch_range=搜索范围已被设定为%d*%d.
 chat.showing_message=附近%d个矿脉的坐标是:
-chat.count_info=附近%d个矿脉的路径点已被添加至JourneyMap中!
+chat.count_info=附近%d个矿脉的路径点已被添加至%s中!
 
 #creative tabs
 itemGroup.GTVeinLocator=格雷科技矿脉定位器

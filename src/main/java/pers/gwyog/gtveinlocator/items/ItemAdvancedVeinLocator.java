@@ -3,20 +3,36 @@ package pers.gwyog.gtveinlocator.items;
 import java.awt.Color;
 import java.util.Collection;
 
-import journeymap.client.JourneymapClient;
-import journeymap.client.model.Waypoint;
-import journeymap.client.properties.WaypointProperties;
-import journeymap.client.waypoint.WaypointStore;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import pers.gwyog.gtveinlocator.compat.JourneyMapHelper;
+import pers.gwyog.gtveinlocator.compat.XaeroMinimapHelper;
 
 public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 
-	public ItemAdvancedVeinLocator(String name) {
+	private SupportModsEnum supportMod;
+	
+	public enum SupportModsEnum {
+		journeymap("JourneyMap"), XaeroMinimap("XaeroMinimap");
+		
+		private String name;
+		
+		private SupportModsEnum(String name) {
+			this.name = name;
+		}
+		
+		public String getName() {
+			return this.name;
+		}
+		
+	}
+	
+	public ItemAdvancedVeinLocator(String name, SupportModsEnum supportMod) {
 		super(name);
+		this.supportMod = supportMod;
 	}
 	
 	@Override
@@ -28,29 +44,26 @@ public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 			int indexX = getClosestIndex(player.posX);
 			int indexZ = getClosestIndex(player.posZ);
 			int count = 0;
-			int dimID = player.dimension; 
+			int dimId = player.dimension; 
 			int targetX, targetZ;
-			boolean setFlag = true;
-			WaypointProperties waypointProperties = JourneymapClient.getWaypointProperties();
-		    Collection<Waypoint> waypoints = WaypointStore.instance().getAll();
 			for (int i=(1-searchRange)/2; i<(1+searchRange)/2; i++)
 				for (int j=(1-searchRange)/2; j<(1+searchRange)/2; j++) {
 					targetX = getCoordinateFromIndex(indexX+i);
 					targetZ = getCoordinateFromIndex(indexZ+j);
-					for (Waypoint wp : waypoints)
-						if (wp.getX()==targetX && wp.getZ()==targetZ && wp.getDimensions().contains(dimID)) {
-							setFlag = false;
-							break;
-						}
-					if (setFlag) {
-						Waypoint waypoint = new Waypoint(I18n.format("waypoint.unknown.name"), targetX, 64, targetZ, Color.white, Waypoint.Type.Normal, world.provider.dimensionId);
-						waypoint.setRandomColor();
-						WaypointStore.instance().save(waypoint);
-						count++;
+					switch (this.supportMod) {
+					case journeymap:
+						if (!JourneyMapHelper.isWaypointExist(targetX, targetZ, dimId))
+							if(JourneyMapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, 64, targetZ, dimId))
+								count++;
+						break;
+					case XaeroMinimap:
+						if (!XaeroMinimapHelper.isWaypointExist(targetX, targetZ))
+							if(XaeroMinimapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, 64, targetZ))
+								count++;
+						break;
 					}
-					setFlag = true;
 				}
-			player.addChatMessage(new ChatComponentText(I18n.format("chat.count_info", count)));
+			player.addChatMessage(new ChatComponentText(I18n.format("chat.count_info", count, this.supportMod.getName())));
 		}
 		return stack;
 	}

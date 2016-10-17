@@ -8,7 +8,7 @@ waypoint.unknown.name=Unknown
 #chat messages
 chat.switch_range=The searching range has been set to %d*%d.
 chat.showing_message=The nearby %d veins' coordinates are:
-chat.count_info=%d waypoints have been added to JournayMap!
+chat.count_info=%d waypoints have been added to %s!
 
 #creative tab
 itemGroup.GTVeinLocator=GregTech Vein-Locator

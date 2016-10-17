@@ -3,10 +3,6 @@ package pers.gwyog.gtveinlocator.items;
 import java.awt.Color;
 import java.util.Collection;
 
-import journeymap.client.JourneymapClient;
-import journeymap.client.model.Waypoint;
-import journeymap.client.properties.WaypointProperties;
-import journeymap.client.waypoint.WaypointStore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

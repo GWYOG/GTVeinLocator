@@ -18,14 +18,18 @@ public class ModItems {
     	itemVeinLocator = new ItemVeinLocator("veinLocator");
     	itemVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
     	if (Loader.isModLoaded("journeymap")) {
-    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator");
+    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", ItemAdvancedVeinLocator.SupportModsEnum.journeymap);
+    		itemAdvancedVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
+    	}
+    	else if (Loader.isModLoaded("XaeroMinimap")) {
+    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", ItemAdvancedVeinLocator.SupportModsEnum.XaeroMinimap);
     		itemAdvancedVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
     	}
     }
     
     public static void registerItems() {
         GameRegistry.registerItem(itemVeinLocator, "veinLocator");
-        if (Loader.isModLoaded("journeymap")) 
+        if (Loader.isModLoaded("journeymap") || Loader.isModLoaded("XaeroMinimap")) 
 			GameRegistry.registerItem(itemAdvancedVeinLocator, "advancedVeinLocator");
     	if (Loader.isModLoaded("gregtech")) {
     		GT_ModHandler.addCraftingRecipe(new ItemStack(ModItems.itemVeinLocator), GT_ModHandler.RecipeBits.NOT_REMOVABLE | GT_ModHandler.RecipeBits.REVERSIBLE, new Object[]{
