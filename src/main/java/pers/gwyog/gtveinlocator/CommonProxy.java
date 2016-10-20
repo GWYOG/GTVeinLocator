@@ -14,6 +14,7 @@ public class CommonProxy {
 		LoadedModHelper.init();
         ModItems.init();
         ModItems.registerItems();
+        ModLoots.init();
 	}
 	
     public void init(FMLInitializationEvent e) {
