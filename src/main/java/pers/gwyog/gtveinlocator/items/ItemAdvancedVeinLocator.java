@@ -3,8 +3,11 @@ package pers.gwyog.gtveinlocator.items;
 import java.awt.Color;
 import java.util.Collection;
 
+import ic2.api.item.ElectricItem;
+import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
@@ -13,7 +16,6 @@ import pers.gwyog.gtveinlocator.compat.XaeroMinimapHelper;
 import pers.gwyog.gtveinlocator.config.ModConfig;
 
 public class ItemAdvancedVeinLocator extends ItemVeinLocator {
-
 	private SupportModsEnum supportMod;
 	
 	public enum SupportModsEnum {
@@ -31,14 +33,17 @@ public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 		
 	}
 	
-	public ItemAdvancedVeinLocator(String name, SupportModsEnum supportMod) {
-		super(name);
+	public ItemAdvancedVeinLocator(String name, double maxCharge, double transferLimit, int tier, SupportModsEnum supportMod) {
+		super(name, maxCharge, transferLimit, tier);
 		this.supportMod = supportMod;
 	}
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		int searchRange = getSearchRangeFromNBT(stack);
+		if (!ElectricItem.manager.use(stack, 8000.0D*searchRange*searchRange, player)) {
+			return stack;
+		}
 		if (player.isSneaking() && !world.isRemote) 
 			switchMode(stack, player, searchRange);
 		else if (!player.isSneaking() && world.isRemote) {

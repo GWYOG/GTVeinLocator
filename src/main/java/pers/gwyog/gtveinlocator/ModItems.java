@@ -7,6 +7,7 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import pers.gwyog.gtveinlocator.compat.LoadedModHelper;
 import pers.gwyog.gtveinlocator.items.ItemAdvancedVeinLocator;
 import pers.gwyog.gtveinlocator.items.ItemVeinLocator;
 
@@ -15,35 +16,33 @@ public class ModItems {
 	public static Item itemAdvancedVeinLocator;
 	
     public static void init() {
-    	itemVeinLocator = new ItemVeinLocator("veinLocator");
+    	itemVeinLocator = new ItemVeinLocator("veinLocator", 100000.0D, 128.0D, 1);
     	itemVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
-    	if (Loader.isModLoaded("journeymap")) {
-    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", ItemAdvancedVeinLocator.SupportModsEnum.journeymap);
+    	if (LoadedModHelper.isJourneyMapLoaded) {
+    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", 1000000.0D, 512.0D, 2, ItemAdvancedVeinLocator.SupportModsEnum.journeymap);
     		itemAdvancedVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
     	}
-    	else if (Loader.isModLoaded("XaeroMinimap")) {
-    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", ItemAdvancedVeinLocator.SupportModsEnum.XaeroMinimap);
+    	else if (LoadedModHelper.isXaeroMinimapLoaded) {
+    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", 1000000.0D, 512.0D, 2, ItemAdvancedVeinLocator.SupportModsEnum.XaeroMinimap);
     		itemAdvancedVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
     	}
     }
     
     public static void registerItems() {
         GameRegistry.registerItem(itemVeinLocator, "veinLocator");
-        if (Loader.isModLoaded("journeymap") || Loader.isModLoaded("XaeroMinimap")) 
+        if (LoadedModHelper.isJourneyMapLoaded || LoadedModHelper.isXaeroMinimapLoaded) 
 			GameRegistry.registerItem(itemAdvancedVeinLocator, "advancedVeinLocator");
-    	if (Loader.isModLoaded("gregtech")) {
-    		GT_ModHandler.addCraftingRecipe(new ItemStack(ModItems.itemVeinLocator), GT_ModHandler.RecipeBits.NOT_REMOVABLE | GT_ModHandler.RecipeBits.REVERSIBLE, new Object[]{
-    				"SSS", "SwS", "SRS",
-    				Character.valueOf('S'), OrePrefixes.plate.get(Materials.Steel),
-    				Character.valueOf('R'), OrePrefixes.plate.get(Materials.RedAlloy)
+		GT_ModHandler.addCraftingRecipe(new ItemStack(ModItems.itemVeinLocator), GT_ModHandler.RecipeBits.NOT_REMOVABLE | GT_ModHandler.RecipeBits.REVERSIBLE, new Object[]{
+				"SSS", "SwS", "SRS",
+				Character.valueOf('S'), OrePrefixes.plate.get(Materials.Steel),
+				Character.valueOf('R'), OrePrefixes.plate.get(Materials.RedAlloy)
+		});
+		if (itemAdvancedVeinLocator!=null) {
+    		GT_ModHandler.addCraftingRecipe(new ItemStack(ModItems.itemAdvancedVeinLocator), GT_ModHandler.RecipeBits.NOT_REMOVABLE | GT_ModHandler.RecipeBits.REVERSIBLE, new Object[]{
+    				"AAA", "AwA", "ACA",
+    				Character.valueOf('A'), OrePrefixes.plate.get(Materials.Aluminium),
+    				Character.valueOf('C'), OrePrefixes.circuit.get(Materials.Basic)
     		});
-    		if (itemAdvancedVeinLocator!=null) {
-        		GT_ModHandler.addCraftingRecipe(new ItemStack(ModItems.itemAdvancedVeinLocator), GT_ModHandler.RecipeBits.NOT_REMOVABLE | GT_ModHandler.RecipeBits.REVERSIBLE, new Object[]{
-        				"AAA", "AwA", "ACA",
-        				Character.valueOf('A'), OrePrefixes.plate.get(Materials.Aluminium),
-        				Character.valueOf('C'), OrePrefixes.circuit.get(Materials.Basic)
-        		});
-    		}
-    	}
+		}
     }
 }
