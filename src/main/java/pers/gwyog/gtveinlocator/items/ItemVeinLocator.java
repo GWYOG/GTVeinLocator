@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import pers.gwyog.gtveinlocator.GTVeinLocator;
+import pers.gwyog.gtveinlocator.config.ModConfig;
 
 public class ItemVeinLocator extends ItemLocatorBase {
 	
@@ -24,7 +25,7 @@ public class ItemVeinLocator extends ItemLocatorBase {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		int searchRange = getSearchRangeFromNBT(stack);
-		if (!ElectricItem.manager.use(stack, 1000.0D*searchRange*searchRange, player)) {
+		if (!ElectricItem.manager.use(stack, ModConfig.veinLocatorSingleUseCost*searchRange*searchRange, player)) {
 			return stack;
 		}
 		if (!world.isRemote)

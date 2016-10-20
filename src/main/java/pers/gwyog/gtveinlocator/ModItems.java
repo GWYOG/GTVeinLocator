@@ -8,6 +8,7 @@ import gregtech.api.util.GT_ModHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import pers.gwyog.gtveinlocator.compat.LoadedModHelper;
+import pers.gwyog.gtveinlocator.config.ModConfig;
 import pers.gwyog.gtveinlocator.items.ItemAdvancedVeinLocator;
 import pers.gwyog.gtveinlocator.items.ItemVeinLocator;
 
@@ -16,14 +17,14 @@ public class ModItems {
 	public static Item itemAdvancedVeinLocator;
 	
     public static void init() {
-    	itemVeinLocator = new ItemVeinLocator("veinLocator", 100000.0D, 128.0D, 1);
+    	itemVeinLocator = new ItemVeinLocator("veinLocator", ModConfig.veinLocatorMaxCharge, ModConfig.veinLocatorTransferLimit, ModConfig.veinLocatorTier);
     	itemVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
     	if (LoadedModHelper.isJourneyMapLoaded) {
-    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", 1000000.0D, 512.0D, 2, ItemAdvancedVeinLocator.SupportModsEnum.journeymap);
+    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", ModConfig.advancedVeinLocatorMaxCharge, ModConfig.advancedVeinLocatorTransferLimit, ModConfig.advancedVeinLocatorTier, ItemAdvancedVeinLocator.SupportModsEnum.journeymap);
     		itemAdvancedVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
     	}
     	else if (LoadedModHelper.isXaeroMinimapLoaded) {
-    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", 1000000.0D, 512.0D, 2, ItemAdvancedVeinLocator.SupportModsEnum.XaeroMinimap);
+    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", ModConfig.advancedVeinLocatorMaxCharge, ModConfig.advancedVeinLocatorTransferLimit, ModConfig.advancedVeinLocatorTier, ItemAdvancedVeinLocator.SupportModsEnum.XaeroMinimap);
     		itemAdvancedVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
     	}
     }
