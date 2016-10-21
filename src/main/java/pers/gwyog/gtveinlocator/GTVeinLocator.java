@@ -6,11 +6,16 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import pers.gwyog.gtveinlocator.config.ModConfig;
+import pers.gwyog.gtveinlocator.items.ItemVeinLocator;
+import pers.gwyog.gtveinlocator.util.GTOreLayerHelper;
 
 @Mod(modid = GTVeinLocator.MODID, name = GTVeinLocator.MODNAME, version = GTVeinLocator.VERSION, dependencies = "required-after:gregtech")
 public class GTVeinLocator {	
@@ -41,10 +46,15 @@ public class GTVeinLocator {
     public void init(FMLInitializationEvent e) {
         this.proxy.init(e);
     }
-
+    
     @EventHandler
     public void postInit(FMLPostInitializationEvent e) {
         this.proxy.postInit(e);
+    }
+    
+    @EventHandler
+    public void onServerStart(FMLServerStartedEvent e) {
+    	GTOreLayerHelper.init();
     }
     
 }

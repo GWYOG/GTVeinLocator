@@ -6,6 +6,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import pers.gwyog.gtveinlocator.compat.LoadedModHelper;
 import pers.gwyog.gtveinlocator.config.ModConfig;
 import pers.gwyog.gtveinlocator.items.ItemVeinLocator;
+import pers.gwyog.gtveinlocator.util.GTOreLayerHelper;
 
 public class CommonProxy {
 	
@@ -22,7 +23,7 @@ public class CommonProxy {
     }
 
     public void postInit(FMLPostInitializationEvent e) {
-
+    	
     }
 }
 

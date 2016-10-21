@@ -18,8 +18,8 @@ import pers.gwyog.gtveinlocator.config.ModConfig;
 
 public class ItemVeinLocator extends ItemLocatorBase {
 	
-	public ItemVeinLocator(String name, double maxCharge, double transferLimit, int tier) {
-		super(name, maxCharge, transferLimit, tier);
+	public ItemVeinLocator(String name, double maxCharge, double transferLimit, int tier, boolean showDuribilityBar) {
+		super(name, maxCharge, transferLimit, tier, showDuribilityBar);
 	}
 	
 	@Override
@@ -28,10 +28,6 @@ public class ItemVeinLocator extends ItemLocatorBase {
 		if (!ElectricItem.manager.use(stack, ModConfig.veinLocatorSingleUseCost*searchRange*searchRange, player)) {
 			return stack;
 		}
-		if (!world.isRemote)
-			player.addChatMessage(new ChatComponentText("ItemDamage="+stack.getItemDamage()));
-		else
-			return stack;
 		if (player.isSneaking() && !world.isRemote) {
 			switchMode(stack, player, searchRange);
 		}
@@ -73,5 +69,4 @@ public class ItemVeinLocator extends ItemLocatorBase {
 	protected int getCoordinateFromIndex(int index) {
 		return index>=0?(24+48*index):(40+48*index);
 	}
-	
 }

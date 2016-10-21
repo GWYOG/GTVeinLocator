@@ -18,13 +18,15 @@ public class ItemLocatorBase extends Item implements IElectricItem, IBoxable {
 	protected final double maxCharge; 
 	protected final double transferLimit; 
 	protected final int tier;
+	protected boolean showDuribilityBar;
 	
-	public ItemLocatorBase(String name, double maxCharge, double transferLimit, int tier) {
+	public ItemLocatorBase(String name, double maxCharge, double transferLimit, int tier, boolean showDuribilityBar) {
 		this.setUnlocalizedName(GTVeinLocator.MODID + "." + name);
 		this.setTextureName(GTVeinLocator.MODID + ":" + name);
 		this.maxCharge = maxCharge;
 		this.transferLimit = transferLimit;
 		this.tier = tier;
+		this.showDuribilityBar = showDuribilityBar;
 		this.setMaxDamage(27);
 		this.setMaxStackSize(1);
 		this.setNoRepair();
@@ -37,7 +39,7 @@ public class ItemLocatorBase extends Item implements IElectricItem, IBoxable {
 	
 	@Override
 	public boolean showDurabilityBar(ItemStack stack) {
-		return true;
+		return showDuribilityBar;
 	}
 	
 	@Override

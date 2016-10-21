@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Collection;
 
 import ic2.api.item.ElectricItem;
+import gregtech.common.blocks.GT_TileEntity_Ores;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +17,7 @@ import pers.gwyog.gtveinlocator.compat.XaeroMinimapHelper;
 import pers.gwyog.gtveinlocator.config.ModConfig;
 
 public class ItemAdvancedVeinLocator extends ItemVeinLocator {
-	private SupportModsEnum supportMod;
+	protected SupportModsEnum supportMod;
 	
 	public enum SupportModsEnum {
 		journeymap("JourneyMap"), XaeroMinimap("XaeroMinimap");
@@ -33,8 +34,8 @@ public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 		
 	}
 	
-	public ItemAdvancedVeinLocator(String name, double maxCharge, double transferLimit, int tier, SupportModsEnum supportMod) {
-		super(name, maxCharge, transferLimit, tier);
+	public ItemAdvancedVeinLocator(String name, double maxCharge, double transferLimit, int tier, boolean showDuribilityBar, SupportModsEnum supportMod) {
+		super(name, maxCharge, transferLimit, tier, showDuribilityBar);
 		this.supportMod = supportMod;
 	}
 	

@@ -1,6 +1,7 @@
 ﻿#items
 item.gtveinlocator.veinLocator.name=GT矿脉定位器
 item.gtveinlocator.advancedVeinLocator.name=高级GT矿脉定位器
+item.gtveinlocator.eliteVeinLocator.name=精英GT矿脉定位器
 
 #waypoint for journeymap
 waypoint.unknown.name=未知
@@ -8,7 +9,45 @@ waypoint.unknown.name=未知
 #chat messages
 chat.switch_range=搜索范围已被设定为%d*%d.
 chat.showing_message=附近%d个矿脉的坐标是:
-chat.count_info=附近%d个矿脉的路径点已被添加至%s中!
+chat.count_info=附近%d个可能矿脉的路径点已被添加至%s中!
+chat.count_info2=在%2$d*%3$d区域中发现%1$d个矿脉,路径点已被添加至%4$s中!
+chat.found_info=发现矿脉: %s
+
+#vein names
+ore.mix.empty=空
+ore.mix.unknown=未知
+ore.mix.naquadah=硅岩
+ore.mix.lignite=褐煤
+ore.mix.coal=煤
+ore.mix.magnetite=磁铁
+ore.mix.gold=金
+ore.mix.iron=铁
+ore.mix.cassiterite=锡石
+ore.mix.tetrahedrite=黝铜
+ore.mix.netherquartz=下届石英
+ore.mix.sulfur=硫
+ore.mix.copper=铜
+ore.mix.bauxite=铝土
+ore.mix.salts=岩盐
+ore.mix.redstone=红石
+ore.mix.soapstone=皂石
+ore.mix.nickel=镍
+ore.mix.platinum=铂
+ore.mix.pitchblende=沥青铀
+ore.mix.uranium=铀
+ore.mix.monazite=独居石
+ore.mix.molybdenum=钼
+ore.mix.tungstate=钨酸盐
+ore.mix.sapphire=蓝宝石
+ore.mix.manganese=锰
+ore.mix.quartz=石英岩
+ore.mix.diamond=钻石
+ore.mix.olivine=橄榄石
+ore.mix.apatite=磷灰石
+ore.mix.galena=方铅矿
+ore.mix.lapis=青金石
+ore.mix.beryllium=铍
+ore.mix.oilsand=油砂
 
 #creative tabs
 itemGroup.GTVeinLocator=格雷科技矿脉定位器

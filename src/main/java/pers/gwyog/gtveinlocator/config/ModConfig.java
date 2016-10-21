@@ -18,6 +18,10 @@ public class ModConfig {
 	 public static double advancedVeinLocatorTransferLimit;
 	 public static int advancedVeinLocatorTier;
 	 public static double advancedVeinLocatorSingleUseCost;
+	 public static double eliteVeinLocatorMaxCharge;
+	 public static double eliteVeinLocatorTransferLimit;
+	 public static int eliteVeinLocatorTier;
+	 public static double eliteVeinLocatorSingleUseCost;
 	 public static int waypointYLevelForJourneyMap;
 	 public static int waypointYLevelForXaeroMinimap;
 	 
@@ -44,6 +48,10 @@ public class ModConfig {
 		 String advancedVeinLocatorTransferLimitDes = "The EU transfer limit of the advanced vein locator.";
 		 String advancedVeinLocatorTierDes = "The tier of the advanced vein locator.";
 		 String advancedVeinLocatorSingleUseCostDes = "The EU cost of a single use of the advanced vein locator";
+		 String eliteVeinLocatorMaxChargeDes = "The max EU charge-amount of the elite vein locator.";
+		 String eliteVeinLocatorTransferLimitDes = "The EU transfer limit of the elite vein locator.";
+		 String eliteVeinLocatorTierDes = "The tier of the elite vein locator.";
+		 String eliteVeinLocatorSingleUseCostDes = "The EU cost of a single use of the elite vein locator";
 		 
 		 Property propertyVeinLocatorMaxCharge = config.get("Locator Data", "veinLocatorMaxCharge", 100000.0D, veinLocatorMaxChargeDes);
 		 veinLocatorMaxCharge = getSafeDoubleFromProperty(propertyVeinLocatorMaxCharge, 1.0D, Double.MAX_VALUE);
@@ -60,9 +68,18 @@ public class ModConfig {
 		 advancedVeinLocatorTransferLimit = getSafeDoubleFromProperty(propertyAdvancedVeinLocatorTransferLimit, 1.0D, Double.MAX_VALUE);
 		 Property propertyAdvancedVeinLocatorTier = config.get("Locator Data", "advancedVeinLocatorTier", 2, advancedVeinLocatorTierDes);
 		 advancedVeinLocatorTier = getSafeIntFromProperty(propertyAdvancedVeinLocatorTier, 1, Integer.MAX_VALUE);
-		 Property propertyAdvancedVeinLocatorSingleUseCost = config.get("Locator Data", "advancedVeinLocatorSingleUseCost", 8000.0D, advancedVeinLocatorSingleUseCostDes);
+		 Property propertyAdvancedVeinLocatorSingleUseCost = config.get("Locator Data", "advancedVeinLocatorSingleUseCost", 15000.0D, advancedVeinLocatorSingleUseCostDes);
 		 advancedVeinLocatorSingleUseCost = getSafeDoubleFromProperty(propertyAdvancedVeinLocatorSingleUseCost, 0.0D, advancedVeinLocatorMaxCharge);
 		 
+		 Property propertyEliteVeinLocatorMaxCharge = config.get("Locator Data", "eliteVeinLocatorMaxCharge", 10000000.0D, eliteVeinLocatorMaxChargeDes);
+		 eliteVeinLocatorMaxCharge = getSafeDoubleFromProperty(propertyEliteVeinLocatorMaxCharge, 1.0D, Double.MAX_VALUE);
+		 Property propertyEliteVeinLocatorTransferLimit = config.get("Locator Data", "eliteVeinLocatorTransferLimit", 2048.0D, eliteVeinLocatorTransferLimitDes);
+		 eliteVeinLocatorTransferLimit = getSafeDoubleFromProperty(propertyEliteVeinLocatorTransferLimit, 1.0D, Double.MAX_VALUE);
+		 Property propertyEliteVeinLocatorTier = config.get("Locator Data", "eliteVeinLocatorTier", 3, eliteVeinLocatorTierDes);
+		 eliteVeinLocatorTier = getSafeIntFromProperty(propertyEliteVeinLocatorTier, 1, Integer.MAX_VALUE);
+		 Property propertyEliteVeinLocatorSingleUseCost = config.get("Locator Data", "eliteVeinLocatorSingleUseCost", 200000.0D, eliteVeinLocatorSingleUseCostDes);
+		 eliteVeinLocatorSingleUseCost = getSafeDoubleFromProperty(propertyEliteVeinLocatorSingleUseCost, 0.0D, eliteVeinLocatorMaxCharge);
+	
 		 //compatibility
 		 String yLevelDesForJourneyMap = "The Y level of the auto-generated waypoints from the Advanced Vein-Locator for JourneyMap.";        
 		 String yLevelDesForXaeroMinimap = "The Y level of the auto-generated waypoints from the Advanced Vein-Locator for Xaero's Minimap.";   
