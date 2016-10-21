@@ -14,7 +14,7 @@ public class ModLoots {
 	    ElectricItem.manager.charge(chargedVeinLocator, Double.POSITIVE_INFINITY, Integer.MAX_VALUE, true, false);
         ChestGenHooks.getInfo("villageBlacksmith").addItem(new WeightedRandomChestContent(chargedVeinLocator, 1, 2, 4));
         if (LoadedModHelper.isJourneyMapLoaded || LoadedModHelper.isXaeroMinimapLoaded) {
-            ItemStack chargedAdvancedVeinLocator = new ItemStack(ModItems.itemVeinLocator, 1);
+            ItemStack chargedAdvancedVeinLocator = new ItemStack(ModItems.itemAdvancedVeinLocator, 1);
     	    ElectricItem.manager.charge(chargedAdvancedVeinLocator, Double.POSITIVE_INFINITY, Integer.MAX_VALUE, true, false);
             ChestGenHooks.getInfo("villageBlacksmith").addItem(new WeightedRandomChestContent(chargedAdvancedVeinLocator, 1, 1, 1));
         }
