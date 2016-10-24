@@ -28,8 +28,11 @@ public class ItemVeinLocator extends ItemLocatorBase {
 		if (!ElectricItem.manager.use(stack, ModConfig.veinLocatorSingleUseCost*searchRange*searchRange, player)) {
 			return stack;
 		}
-		if (player.isSneaking() && !world.isRemote) {
-			switchMode(stack, player, searchRange);
+		if (player.isSneaking()) {
+			if (!world.isRemote)
+				switchMode(stack, searchRange);
+			else
+				player.addChatMessage(new ChatComponentText(I18n.format("chat.switch_range", 4-searchRange, 4-searchRange)));
 		}
 		else if (!player.isSneaking() && world.isRemote) {
 			int indexX = getClosestIndex(player.posX);
@@ -46,11 +49,10 @@ public class ItemVeinLocator extends ItemLocatorBase {
 		return stack;
 	}
 	
-	protected void switchMode(ItemStack stack, EntityPlayer player, int searchRange){
+	protected void switchMode(ItemStack stack, int searchRange){
 		if (stack.getTagCompound()==null)
 			stack.setTagCompound(new NBTTagCompound());
 		stack.getTagCompound().setInteger("SearchRange",4-searchRange);
-		player.addChatMessage(new ChatComponentText(I18n.format("chat.switch_range", 4-searchRange, 4-searchRange)));
 		return;
 	}
 	
