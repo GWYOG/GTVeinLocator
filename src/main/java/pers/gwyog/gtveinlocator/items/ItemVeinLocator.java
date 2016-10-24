@@ -25,26 +25,27 @@ public class ItemVeinLocator extends ItemLocatorBase {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		int searchRange = getSearchRangeFromNBT(stack);
-		if (!ElectricItem.manager.use(stack, ModConfig.veinLocatorSingleUseCost*searchRange*searchRange, player)) {
-			return stack;
-		}
 		if (player.isSneaking()) {
 			if (!world.isRemote)
 				switchMode(stack, searchRange);
 			else
 				player.addChatMessage(new ChatComponentText(I18n.format("chat.switch_range", 4-searchRange, 4-searchRange)));
 		}
-		else if (!player.isSneaking() && world.isRemote) {
-			int indexX = getClosestIndex(player.posX);
-			int indexZ = getClosestIndex(player.posZ);
-			player.addChatMessage(new ChatComponentText(I18n.format("chat.showing_message", searchRange*searchRange)));
-			String message = "";
-			for (int i=(1-searchRange)/2; i<(1+searchRange)/2; i++) {
-				for (int j=(1-searchRange)/2; j<(1+searchRange)/2; j++)
-					message = message + "(" + getCoordinateFromIndex(indexX+i) + "," + getCoordinateFromIndex(indexZ+j) + ") "; 
-				player.addChatMessage(new ChatComponentText(message));	
-				message = "";
-			}
+		else if (!player.isSneaking()) {
+			if (!ElectricItem.manager.use(stack, ModConfig.veinLocatorSingleUseCost*searchRange*searchRange, player))
+				return stack;
+			if (world.isRemote) {
+				int indexX = getClosestIndex(player.posX);
+				int indexZ = getClosestIndex(player.posZ);
+				player.addChatMessage(new ChatComponentText(I18n.format("chat.showing_message", searchRange*searchRange)));
+				String message = "";
+				for (int i=(1-searchRange)/2; i<(1+searchRange)/2; i++) {
+					for (int j=(1-searchRange)/2; j<(1+searchRange)/2; j++)
+						message = message + "(" + getCoordinateFromIndex(indexX+i) + "," + getCoordinateFromIndex(indexZ+j) + ") "; 
+					player.addChatMessage(new ChatComponentText(message));	
+					message = "";
+				}
+			}	
 		}
 		return stack;
 	}

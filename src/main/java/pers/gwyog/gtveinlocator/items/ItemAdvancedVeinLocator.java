@@ -42,15 +42,15 @@ public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		int searchRange = getSearchRangeFromNBT(stack);
-		if (!ElectricItem.manager.use(stack, ModConfig.advancedVeinLocatorSingleUseCost*searchRange*searchRange, player)) {
-			return stack;
-		}
 		if (player.isSneaking()) 
 			if (!world.isRemote)
 				switchMode(stack, searchRange);
 			else
 				player.addChatMessage(new ChatComponentText(I18n.format("chat.switch_range", 4-searchRange, 4-searchRange)));
 		else if (!player.isSneaking() && world.isRemote) {
+			if (!ElectricItem.manager.use(stack, ModConfig.advancedVeinLocatorSingleUseCost*searchRange*searchRange, player)) {
+				return stack;
+			}
 			int indexX = getClosestIndex(player.posX);
 			int indexZ = getClosestIndex(player.posZ);
 			int count = 0;
