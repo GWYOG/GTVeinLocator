@@ -11,13 +11,18 @@ import net.minecraft.client.resources.I18n;
 
 public class JourneyMapHelper {
 	
-	public static boolean isWaypointExist(int posX, int posZ, int dimId) {
-		WaypointProperties waypointProperties = JourneymapClient.getWaypointProperties();
-	    Collection<Waypoint> waypoints = WaypointStore.instance().getAll();
-		for (Waypoint wp : waypoints)
-			if (wp.getX()==posX && wp.getZ()==posZ && wp.getDimensions().contains(dimId))
-				return true;
-		return false;
+	public static int isWaypointExist(int posX, int posZ, int dimId) {
+		try {
+			WaypointProperties waypointProperties = JourneymapClient.getWaypointProperties();
+		    Collection<Waypoint> waypoints = WaypointStore.instance().getAll();
+			for (Waypoint wp : waypoints)
+				if (wp.getX()==posX && wp.getZ()==posZ && wp.getDimensions().contains(dimId))
+					return 1;
+		}
+		catch (Exception e) {
+			return -1;
+		}
+		return 0;
 	}
 	
 	public static boolean addWaypoint(String name, int posX, int posY, int posZ, int dimId) {

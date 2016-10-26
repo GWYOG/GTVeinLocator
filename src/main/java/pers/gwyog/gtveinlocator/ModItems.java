@@ -21,27 +21,16 @@ public class ModItems {
     public static void init() {
     	itemVeinLocator = new ItemVeinLocator("veinLocator", ModConfig.veinLocatorMaxCharge, ModConfig.veinLocatorTransferLimit, ModConfig.veinLocatorTier, true);
     	itemVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
-    	if (LoadedModHelper.isJourneyMapLoaded) {
-    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", ModConfig.advancedVeinLocatorMaxCharge, ModConfig.advancedVeinLocatorTransferLimit, ModConfig.advancedVeinLocatorTier, true, ItemAdvancedVeinLocator.SupportModsEnum.journeymap);
-    		itemAdvancedVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
-    		itemEliteVeinLocator = new ItemEliteVeinLocator("eliteVeinLocator", ModConfig.eliteVeinLocatorMaxCharge, ModConfig.eliteVeinLocatorTransferLimit, ModConfig.eliteVeinLocatorTier, true, ItemEliteVeinLocator.SupportModsEnum.journeymap);
-    		itemEliteVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
-    	
-    	}
-    	else if (LoadedModHelper.isXaeroMinimapLoaded) {
-    		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", ModConfig.advancedVeinLocatorMaxCharge, ModConfig.advancedVeinLocatorTransferLimit, ModConfig.advancedVeinLocatorTier, true, ItemAdvancedVeinLocator.SupportModsEnum.XaeroMinimap);
-    		itemAdvancedVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
-    		itemEliteVeinLocator = new ItemEliteVeinLocator("eliteVeinLocator", ModConfig.eliteVeinLocatorMaxCharge, ModConfig.eliteVeinLocatorTransferLimit, ModConfig.eliteVeinLocatorTier, true, ItemEliteVeinLocator.SupportModsEnum.XaeroMinimap);
-    		itemEliteVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
-    	}
+		itemAdvancedVeinLocator = new ItemAdvancedVeinLocator("advancedVeinLocator", ModConfig.advancedVeinLocatorMaxCharge, ModConfig.advancedVeinLocatorTransferLimit, ModConfig.advancedVeinLocatorTier, true);
+		itemAdvancedVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
+		itemEliteVeinLocator = new ItemEliteVeinLocator("eliteVeinLocator", ModConfig.eliteVeinLocatorMaxCharge, ModConfig.eliteVeinLocatorTransferLimit, ModConfig.eliteVeinLocatorTier, true);
+		itemEliteVeinLocator.setCreativeTab(GTVeinLocator.tabGTVeinLocator);
     }
     
     public static void registerItems() {
         GameRegistry.registerItem(itemVeinLocator, "veinLocator");
-        if (LoadedModHelper.isJourneyMapLoaded || LoadedModHelper.isXaeroMinimapLoaded) {
-			GameRegistry.registerItem(itemAdvancedVeinLocator, "advancedVeinLocator");
-			GameRegistry.registerItem(itemEliteVeinLocator, "eliteVeinLocator");
-        }
+		GameRegistry.registerItem(itemAdvancedVeinLocator, "advancedVeinLocator");
+		GameRegistry.registerItem(itemEliteVeinLocator, "eliteVeinLocator");
 		GT_ModHandler.addCraftingRecipe(new ItemStack(ModItems.itemVeinLocator), GT_ModHandler.RecipeBits.NOT_REMOVABLE | GT_ModHandler.RecipeBits.REVERSIBLE, new Object[]{
 				"SSS", "SwS", "SRS",
 				Character.valueOf('S'), OrePrefixes.plate.get(Materials.Steel),

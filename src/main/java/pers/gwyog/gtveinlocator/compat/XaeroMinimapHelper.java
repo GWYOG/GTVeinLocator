@@ -10,11 +10,17 @@ import com.minimap.settings.ModSettings;
 public class XaeroMinimapHelper {
 	
 	//For XaeroMinimap, Minimap.waypoints.list is always the list of waypoints of the current world.
-	public static boolean isWaypointExist(int posX, int posZ) {
-		for (Waypoint wp : Minimap.waypoints.list)
-			if (wp.x==posX && wp.z==posZ)
-				return true;
-		return false;
+	public static int isWaypointExist(int posX, int posZ) {
+		try {
+			for (Waypoint wp : Minimap.waypoints.list)
+				if (wp.x==posX && wp.z==posZ)
+					return 1;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+		return 0;
 	}
 	
 	public static boolean addWaypoint(String name, int posX, int posY, int posZ) {

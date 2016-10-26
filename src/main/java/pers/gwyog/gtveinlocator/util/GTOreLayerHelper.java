@@ -28,12 +28,15 @@ public class GTOreLayerHelper {
 	
 	
 	public enum WorldNameEnum{
-		overworld, nether, end, moon, mars;
+		overworld, nether, end, moon, mars, unknown;
 	}
 	
 	public static void init() {
-		for (GT_Worldgen_GT_Ore_Layer worldGen : GT_Worldgen_GT_Ore_Layer.sList) {		 
+		GTVeinNameHelper.registerVeinName("ore.mix.empty");
+		GTVeinNameHelper.registerVeinName("ore.mix.unknown");
+		for (GT_Worldgen_GT_Ore_Layer worldGen : GT_Worldgen_GT_Ore_Layer.sList) {
 			if (worldGen.mEnabled) {
+				GTVeinNameHelper.registerVeinName(worldGen.mWorldGenName);
 				List<Short> componentList = new LinkedList<Short>();
 				componentList.add(worldGen.mPrimaryMeta);
 				componentList.add(worldGen.mSecondaryMeta);
@@ -54,15 +57,20 @@ public class GTOreLayerHelper {
 					minLevelOreEnd = worldGen.mMinY<minLevelOreEnd? worldGen.mMinY : minLevelOreEnd;
 					maxLevelOreEnd = worldGen.mMaxY>maxLevelOreEnd? worldGen.mMaxY : maxLevelOreEnd;
 				}
-				if (worldGen.mMoon) {
-					mapGTMoonOreLayer.put(componentList, worldGen.mWorldGenName); 
-					minLevelOreMoon = worldGen.mMinY<minLevelOreMoon ? worldGen.mMinY : minLevelOreMoon;
-					maxLevelOreMoon = worldGen.mMaxY>maxLevelOreMoon ? worldGen.mMaxY : maxLevelOreMoon;
+				try {
+					if (worldGen.mMoon) {
+						mapGTMoonOreLayer.put(componentList, worldGen.mWorldGenName); 
+						minLevelOreMoon = worldGen.mMinY<minLevelOreMoon ? worldGen.mMinY : minLevelOreMoon;
+						maxLevelOreMoon = worldGen.mMaxY>maxLevelOreMoon ? worldGen.mMaxY : maxLevelOreMoon;
+					}
+					if (worldGen.mMars) {
+						mapGTMarsOreLayer.put(componentList, worldGen.mWorldGenName); 
+						minLevelOreMars = worldGen.mMinY<minLevelOreMars ? worldGen.mMinY : minLevelOreMars;
+						maxLevelOreMars = worldGen.mMaxY>maxLevelOreMars ? worldGen.mMaxY : maxLevelOreMars;
+					}
 				}
-				if (worldGen.mMars) {
-					mapGTMarsOreLayer.put(componentList, worldGen.mWorldGenName); 
-					minLevelOreMars = worldGen.mMinY<minLevelOreMars ? worldGen.mMinY : minLevelOreMars;
-					maxLevelOreMars = worldGen.mMaxY>maxLevelOreMars ? worldGen.mMaxY : maxLevelOreMars;
+				catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}

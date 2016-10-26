@@ -12,23 +12,31 @@ import java.util.Map.Entry;
 import gregtech.common.blocks.GT_TileEntity_Ores;
 import ic2.api.item.ElectricItem;
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import pers.gwyog.gtveinlocator.compat.JourneyMapHelper;
+import pers.gwyog.gtveinlocator.compat.LoadedModHelper;
 import pers.gwyog.gtveinlocator.compat.XaeroMinimapHelper;
+import pers.gwyog.gtveinlocator.compat.LoadedModHelper.SupportModsEnum;
 import pers.gwyog.gtveinlocator.config.ModConfig;
+import pers.gwyog.gtveinlocator.network.ClientInfoMessageTranslationPacket;
+import pers.gwyog.gtveinlocator.network.ClientVeinNameTranslationPacket;
+import pers.gwyog.gtveinlocator.network.ClientWaypointPacket;
+import pers.gwyog.gtveinlocator.network.GTVLNetwork;
 import pers.gwyog.gtveinlocator.util.GTOreLayerHelper;
 import pers.gwyog.gtveinlocator.util.GTOreLayerHelper.WorldNameEnum;
 
 public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 
 	public ItemEliteVeinLocator(String name, double maxCharge, double transferLimit, int tier,
-			boolean showDuribilityBar, SupportModsEnum supportMod) {
-		super(name, maxCharge, transferLimit, tier, showDuribilityBar, supportMod);
+			boolean showDuribilityBar) {
+		super(name, maxCharge, transferLimit, tier, showDuribilityBar);
 	}
 	
 	@Override
@@ -38,62 +46,41 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 			if (!world.isRemote)
 				switchMode(stack, searchRange);
 			else
-				player.addChatMessage(new ChatComponentText(I18n.format("chat.switch_range", 4-searchRange, 4-searchRange)));
+				player.addChatMessage(new ChatComponentTranslation("chat.switch_range", 4-searchRange, 4-searchRange));
 		else {
 			if (!ElectricItem.manager.use(stack, ModConfig.advancedVeinLocatorSingleUseCost*searchRange*searchRange, player)) {
 				return stack;
 			}
-			int indexX = getClosestIndex(player.posX);
-			int indexZ = getClosestIndex(player.posZ);
-			int count = 0;
-			int veinCount = 0;
-			int dimId = player.dimension;
-			WorldProvider worldProvider = world.provider;
-			int targetX, targetZ;
-			String foundVeinNames = "";
-			for (int i=(1-searchRange)/2; i<(1+searchRange)/2; i++)
-				for (int j=(1-searchRange)/2; j<(1+searchRange)/2; j++) {
-					targetX = getCoordinateFromIndex(indexX+i);
-					targetZ = getCoordinateFromIndex(indexZ+j);
-					switch (this.supportMod) {
-					case journeymap:
-						if (!JourneyMapHelper.isWaypointExist(targetX, targetZ, dimId)) {
-							String nameUnlocalitzed = GTOreLayerHelper.judgeOreLayerName(judgeVeinComponent(world, targetX, targetZ), getWorldNameEnum(worldProvider));
-							String name = I18n.format(nameUnlocalitzed);
-							if(JourneyMapHelper.addWaypoint(name, targetX, ModConfig.waypointYLevelForJourneyMap, targetZ, dimId)) {
-								count++;
-								if (!nameUnlocalitzed.equals("ore.mix.empty") && !nameUnlocalitzed.equals("ore.mix.unknown")) {
-									veinCount++;
-									if (foundVeinNames.isEmpty()) {
-										foundVeinNames = name;
-									}
-									else
-										foundVeinNames += ", " + name;
-								}
+			if (!world.isRemote) {
+				int indexX = getClosestIndex(player.posX);
+				int indexZ = getClosestIndex(player.posZ);
+				int count = 0;
+				int veinCount = 0;
+				int isWaypointExist;
+				int dimId = player.dimension;
+				WorldProvider worldProvider = world.provider;
+				int targetX, targetY, targetZ;
+				String foundVeinNames = "", nameUnlocalitzed;
+				for (int i=(1-searchRange)/2; i<(1+searchRange)/2; i++)
+					for (int j=(1-searchRange)/2; j<(1+searchRange)/2; j++) {
+						targetX = getCoordinateFromIndex(indexX+i);
+						targetZ = getCoordinateFromIndex(indexZ+j);
+						targetY = getVeinYLevel(world, targetX, targetZ);
+						nameUnlocalitzed = GTOreLayerHelper.judgeOreLayerName(judgeVeinComponent(world, targetX, targetY, targetZ), getWorldNameEnum(worldProvider));
+						GTVLNetwork.INSTANCE.sendTo(new ClientWaypointPacket(nameUnlocalitzed, targetX, targetY, targetZ, dimId), (EntityPlayerMP)player);
+						count++;
+						if (!nameUnlocalitzed.equals("ore.mix.empty") && !nameUnlocalitzed.equals("ore.mix.unknown")) {
+							veinCount++;
+							if (foundVeinNames.isEmpty()) {
+								foundVeinNames = nameUnlocalitzed;
 							}
+							else
+								foundVeinNames += "," + nameUnlocalitzed;
 						}
-						break;
-					case XaeroMinimap:
-						if (!XaeroMinimapHelper.isWaypointExist(targetX, targetZ)) {
-							String nameUnlocalitzed = GTOreLayerHelper.judgeOreLayerName(judgeVeinComponent(world, targetX, targetZ), getWorldNameEnum(worldProvider));
-							String name = I18n.format(nameUnlocalitzed);
-							if(XaeroMinimapHelper.addWaypoint(name, targetX, ModConfig.waypointYLevelForXaeroMinimap, targetZ)) {
-								count++;
-								if (!nameUnlocalitzed.equals("ore.mix.empty") && !nameUnlocalitzed.equals("ore.mix.unknown")) {
-									veinCount++;
-									if (foundVeinNames.isEmpty()) {
-										foundVeinNames = name;
-									}
-									else
-										foundVeinNames += ", " + name;
-								}
-							}
-						}
-						break;
 					}
-				}
-			player.addChatMessage(new ChatComponentText(I18n.format("chat.count_info2", veinCount, searchRange, searchRange, this.supportMod.getName())));
-			player.addChatMessage(new ChatComponentText(I18n.format("chat.found_info", foundVeinNames)));
+				GTVLNetwork.INSTANCE.sendTo(new ClientInfoMessageTranslationPacket(2, new int[]{veinCount, searchRange, searchRange}), (EntityPlayerMP)player);
+				GTVLNetwork.INSTANCE.sendTo(new ClientVeinNameTranslationPacket(foundVeinNames), (EntityPlayerMP)player);
+			}
 		}
 		return stack;	
 	}
@@ -110,13 +97,13 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 		else if (provider.getDimensionName().equals("Mars"))
 			return WorldNameEnum.mars;
 		else
-			//never return this
-			return WorldNameEnum.overworld;
+			//other worlds where GT veins don't generate
+			return WorldNameEnum.unknown;
 	}
 	
-	public List<Short> judgeVeinComponent(World world, int x, int z) {
-		Map<Short, Integer> map = new HashMap<Short, Integer>();
-		for (int y=0;y<=130;y++) {
+	public int getVeinYLevel(World world, int x, int z) {
+		WorldNameEnum worldName = getWorldNameEnum(world.provider);
+		for (int y=GTOreLayerHelper.getMinOreLevel(worldName)-2;y<=GTOreLayerHelper.getMaxOreLevel(worldName);y++) {
 			for (int dx=-2;dx<3;dx++)
 				for(int dz=-2;dz<3;dz++)
 					if (world.getBlock(x+dx, y, z+dz).getUnlocalizedName().equals("gt.blockores")) {
@@ -124,15 +111,20 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 						//avoid counting the small_ores.
 						if (meta>=16000)
 							continue;
-						System.out.println("metadata="+meta);
-						System.out.println("metadata="+((GT_TileEntity_Ores)world.getTileEntity(x+dx, y, z+dz)).mMetaData);
-						System.out.println("x="+(x+dx)+", y="+(y)+", z="+(z+dz));
-						return getSortedListFromMap(scanCarefully(map, world, x+dx, y, z+dz));
+						return y;
 					}
 			if (world.canBlockSeeTheSky(x, y, z)) 
 				break;
 		}
-		return null;
+		return -1;
+	}
+	
+	public List<Short> judgeVeinComponent(World world, int x, int y, int z) {
+		Map<Short, Integer> map = new HashMap<Short, Integer>();
+		if (y!=-1)
+			return getSortedListFromMap(scanCarefully(map, world, x, y, z));
+		else
+			return null;
 	}
 	
 	public Map<Short, Integer> scanCarefully(Map<Short, Integer> map, World world, int x, int y, int z) {

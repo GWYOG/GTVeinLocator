@@ -9,9 +9,14 @@ waypoint.unknown.name=Unknown
 #chat messages
 chat.switch_range=The searching range has been set to %d*%d.
 chat.showing_message=The nearby %d veins' coordinates are:
-chat.count_info=%d waypoints have been added to %s!
-chat.count_info2=Found %1$d veins in %2$d*%3$d area, the waypoints have been added to %4$s!
+chat.info1=%d waypoints have been added to %s!
+chat.info2=Found %1$d veins in %2$d*%3$d area, the waypoints have been added to %4$s!
 chat.found_info=Found veins: %s
+
+#mod compat messages
+modcompat.nominimap.info=Found no compatible minimap mod, please install one before using this item. 
+modcompat.checkwperror.info=Error when checking the waypoints for %s, please update this mod before reporting the bug. 
+modcompat.addwperror.info=Error when adding waypoints for %s, please update this mod before reporting the bug. 
 
 #vein names
 ore.mix.empty=Empty

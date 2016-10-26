@@ -9,9 +9,14 @@ waypoint.unknown.name=未知
 #chat messages
 chat.switch_range=搜索范围已被设定为%d*%d.
 chat.showing_message=附近%d个矿脉的坐标是:
-chat.count_info=附近%d个可能矿脉的路径点已被添加至%s中!
-chat.count_info2=在%2$d*%3$d区域中发现%1$d个矿脉,路径点已被添加至%4$s中!
+chat.info1=附近%d个可能矿脉的路径点已被添加至%s中!
+chat.info2=在%2$d*%3$d区域中发现%1$d个矿脉,路径点已被添加至%4$s中!
 chat.found_info=发现矿脉: %s
+
+#mod compat messages
+modcompat.nominimap.info=未找到兼容的小地图mod，请安装后再使用此物品.
+modcompat.checkwperror.info=查询%s路径点时发生错误!反馈此bug前请先将该小地图mod更新到最新版.
+modcompat.addwperror.info=添加路径点至%s时发生错误!反馈此bug前请先将该小地图mod更新到最新版.
 
 #vein names
 ore.mix.empty=空
