@@ -8,12 +8,14 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import pers.gwyog.gtveinlocator.compat.LoadedModHelper;
+import pers.gwyog.gtveinlocator.util.ClientVeinNameHelper;
+import pers.gwyog.gtveinlocator.util.GTVeinNameHelper;
 
 public class ClientVeinNameTranslationPacketHandler implements IMessageHandler<ClientVeinNameTranslationPacket, IMessage>{
 
 	@Override
 	public IMessage onMessage(ClientVeinNameTranslationPacket message, MessageContext ctx) {
-		if (LoadedModHelper.supportMod == null)
+		if (LoadedModHelper.supportMod == null || LoadedModHelper.failedCompat)
 			return null;
 		String unlocalizedText = message.getText();
 		String[] unlocalizedTextArray = unlocalizedText.split(",");

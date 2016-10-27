@@ -54,7 +54,7 @@ public class GTVeinLocator {
     
     @EventHandler
     public void onServerStart(FMLServerStartedEvent e) {
-    	GTOreLayerHelper.init();
+    	this.proxy.onServerStart(e);
     }
     
 }

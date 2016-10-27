@@ -3,10 +3,13 @@ package pers.gwyog.gtveinlocator;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import net.minecraftforge.common.MinecraftForge;
 import pers.gwyog.gtveinlocator.compat.LoadedModHelper;
 import pers.gwyog.gtveinlocator.config.ModConfig;
 import pers.gwyog.gtveinlocator.items.ItemVeinLocator;
 import pers.gwyog.gtveinlocator.network.GTVLNetwork;
+import pers.gwyog.gtveinlocator.util.ClientVeinNameHelper;
 import pers.gwyog.gtveinlocator.util.GTOreLayerHelper;
 
 public class CommonProxy {
@@ -26,5 +29,9 @@ public class CommonProxy {
     public void postInit(FMLPostInitializationEvent e) {
     	
     }
+    
+   	public void onServerStart(FMLServerStartedEvent e) {
+   		GTOreLayerHelper.init();
+   	}
 }
 

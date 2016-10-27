@@ -6,6 +6,7 @@ public class LoadedModHelper {
 	public static boolean isJourneyMapLoaded;
 	public static boolean isXaeroMinimapLoaded;
 	public static SupportModsEnum supportMod;
+	public static boolean failedCompat = true;
 	
 	public enum SupportModsEnum {
 		JOURNEYMAP("JourneyMap"), XAEROMINIMAP("XaeroMinimap");
@@ -25,6 +26,13 @@ public class LoadedModHelper {
 	public static void init() {
 		isJourneyMapLoaded = Loader.isModLoaded("journeymap");
 		isXaeroMinimapLoaded = Loader.isModLoaded("XaeroMinimap");
-		supportMod = isJourneyMapLoaded? SupportModsEnum.JOURNEYMAP: isXaeroMinimapLoaded? SupportModsEnum.XAEROMINIMAP: null;
+		if (isJourneyMapLoaded) {
+			supportMod = SupportModsEnum.JOURNEYMAP;
+			failedCompat = JourneyMapHelper.failedCompat;
+		}
+		else if(isXaeroMinimapLoaded) {
+			supportMod = SupportModsEnum.XAEROMINIMAP;
+			failedCompat = XaeroMinimapHelper.failedCompat;
+		}
 	}
 }

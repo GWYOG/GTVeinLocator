@@ -14,9 +14,9 @@ chat.info2=Found %1$d veins in %2$d*%3$d area, the waypoints have been added to 
 chat.found_info=Found veins: %s
 
 #mod compat messages
-modcompat.nominimap.info=Found no compatible minimap mod, please install one before using this item. 
-modcompat.checkwperror.info=Error when checking the waypoints for %s, please update this mod before reporting the bug. 
-modcompat.addwperror.info=Error when adding waypoints for %s, please update this mod before reporting the bug. 
+modcompat.oldversion_gt.info=Gregtech's version may be out-of-date, please update it first before reporting the bug.
+modcompat.no_minimap.info=Found no compatible minimap mod, please install one before using this item. 
+modcompat.oldversion_minimap.info=Failed to add compatibility for %s, please update this mod first before reporting the bug. 
 
 #vein names
 ore.mix.empty=Empty

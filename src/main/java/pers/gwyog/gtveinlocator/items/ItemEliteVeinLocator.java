@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import gregtech.common.blocks.GT_TileEntity_Ores;
 import ic2.api.item.ElectricItem;
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -31,6 +32,7 @@ import pers.gwyog.gtveinlocator.network.ClientWaypointPacket;
 import pers.gwyog.gtveinlocator.network.GTVLNetwork;
 import pers.gwyog.gtveinlocator.util.GTOreLayerHelper;
 import pers.gwyog.gtveinlocator.util.GTOreLayerHelper.WorldNameEnum;
+import pers.gwyog.gtveinlocator.util.GTVeinNameHelper;
 
 public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 
@@ -56,7 +58,6 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 				int indexZ = getClosestIndex(player.posZ);
 				int count = 0;
 				int veinCount = 0;
-				int isWaypointExist;
 				int dimId = player.dimension;
 				WorldProvider worldProvider = world.provider;
 				int targetX, targetY, targetZ;
@@ -79,7 +80,8 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 						}
 					}
 				GTVLNetwork.INSTANCE.sendTo(new ClientInfoMessageTranslationPacket(2, new int[]{veinCount, searchRange, searchRange}), (EntityPlayerMP)player);
-				GTVLNetwork.INSTANCE.sendTo(new ClientVeinNameTranslationPacket(foundVeinNames), (EntityPlayerMP)player);
+				if (!foundVeinNames.isEmpty())
+					GTVLNetwork.INSTANCE.sendTo(new ClientVeinNameTranslationPacket(foundVeinNames), (EntityPlayerMP)player);
 			}
 		}
 		return stack;	

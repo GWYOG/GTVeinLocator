@@ -14,9 +14,9 @@ chat.info2=在%2$d*%3$d区域中发现%1$d个矿脉,路径点已被添加至%4$s
 chat.found_info=发现矿脉: %s
 
 #mod compat messages
-modcompat.nominimap.info=未找到兼容的小地图mod，请安装后再使用此物品.
-modcompat.checkwperror.info=查询%s路径点时发生错误!反馈此bug前请先将该小地图mod更新到最新版.
-modcompat.addwperror.info=添加路径点至%s时发生错误!反馈此bug前请先将该小地图mod更新到最新版.
+modcompat.oldversion_gt.info=你的格雷科技版本可能有点落后，反馈此bug前请先将它更新到最新版.
+modcompat.no_minimap.info=未找到兼容的小地图mod，请安装后再使用此物品.
+modcompat.oldversion_minimap.info=兼容%s时发生错误！反馈此bug前请先将该小地图mod更新到最新版.
 
 #vein names
 ore.mix.empty=空
