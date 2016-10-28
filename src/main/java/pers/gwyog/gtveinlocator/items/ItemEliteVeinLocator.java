@@ -37,8 +37,8 @@ import pers.gwyog.gtveinlocator.util.GTVeinNameHelper;
 public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 
 	public ItemEliteVeinLocator(String name, double maxCharge, double transferLimit, int tier,
-			boolean showDuribilityBar) {
-		super(name, maxCharge, transferLimit, tier, showDuribilityBar);
+			boolean useEnergy) {
+		super(name, maxCharge, transferLimit, tier, useEnergy);
 	}
 	
 	@Override
@@ -50,8 +50,9 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 			else
 				player.addChatMessage(new ChatComponentTranslation("chat.switch_range", 4-searchRange, 4-searchRange));
 		else {
-			if (!ElectricItem.manager.use(stack, ModConfig.advancedVeinLocatorSingleUseCost*searchRange*searchRange, player)) {
-				return stack;
+			if (useEnergy)
+				if (!ElectricItem.manager.use(stack, ModConfig.advancedVeinLocatorSingleUseCost*searchRange*searchRange, player)) {
+					return stack;
 			}
 			if (!world.isRemote) {
 				int indexX = getClosestIndex(player.posX);

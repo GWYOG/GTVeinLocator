@@ -18,8 +18,8 @@ import pers.gwyog.gtveinlocator.config.ModConfig;
 
 public class ItemVeinLocator extends ItemLocatorBase {
 	
-	public ItemVeinLocator(String name, double maxCharge, double transferLimit, int tier, boolean showDuribilityBar) {
-		super(name, maxCharge, transferLimit, tier, showDuribilityBar);
+	public ItemVeinLocator(String name, double maxCharge, double transferLimit, int tier, boolean useEnergy) {
+		super(name, maxCharge, transferLimit, tier, useEnergy);
 	}
 	
 	@Override
@@ -32,8 +32,9 @@ public class ItemVeinLocator extends ItemLocatorBase {
 				player.addChatMessage(new ChatComponentText(I18n.format("chat.switch_range", 4-searchRange, 4-searchRange)));
 		}
 		else if (!player.isSneaking()) {
-			if (!ElectricItem.manager.use(stack, ModConfig.veinLocatorSingleUseCost*searchRange*searchRange, player))
-				return stack;
+			if (useEnergy)
+				if (!ElectricItem.manager.use(stack, ModConfig.veinLocatorSingleUseCost*searchRange*searchRange, player))
+					return stack;
 			if (world.isRemote) {
 				int indexX = getClosestIndex(player.posX);
 				int indexZ = getClosestIndex(player.posZ);

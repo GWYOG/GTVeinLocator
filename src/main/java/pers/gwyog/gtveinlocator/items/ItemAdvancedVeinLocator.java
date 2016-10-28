@@ -24,8 +24,8 @@ import pers.gwyog.gtveinlocator.util.GTOreLayerHelper;
 
 public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 	
-	public ItemAdvancedVeinLocator(String name, double maxCharge, double transferLimit, int tier, boolean showDuribilityBar) {
-		super(name, maxCharge, transferLimit, tier, showDuribilityBar);
+	public ItemAdvancedVeinLocator(String name, double maxCharge, double transferLimit, int tier, boolean useEnergy) {
+		super(name, maxCharge, transferLimit, tier, useEnergy);
 	}
 	
 	@Override
@@ -37,8 +37,9 @@ public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 			else
 				player.addChatMessage(new ChatComponentText(I18n.format("chat.switch_range", 4-searchRange, 4-searchRange)));
 		else if (!player.isSneaking()) {
-			if (!ElectricItem.manager.use(stack, ModConfig.advancedVeinLocatorSingleUseCost*searchRange*searchRange, player)) 
-				return stack;
+			if (useEnergy)
+				if (!ElectricItem.manager.use(stack, ModConfig.advancedVeinLocatorSingleUseCost*searchRange*searchRange, player)) 
+					return stack;
 			if (world.isRemote) {
 				SupportModsEnum supportMod = LoadedModHelper.supportMod;
 				if (!ClientVeinNameHelper.basicSupport) {
@@ -65,12 +66,12 @@ public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 						switch (supportMod) {
 						case JOURNEYMAP:
 							if (!JourneyMapHelper.isWaypointExist(targetX, targetZ, dimId, false))
-								if(JourneyMapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, ModConfig.waypointYLevelForJourneyMap, targetZ, dimId))
+								if(JourneyMapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, ModConfig.waypointYLevelAdvancedLocator, targetZ, dimId))
 									count++;
 							break;
 						case XAEROMINIMAP:
 							if (!XaeroMinimapHelper.isWaypointExist(targetX, targetZ, false)) {
-								if(XaeroMinimapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, ModConfig.waypointYLevelForXaeroMinimap, targetZ))
+								if(XaeroMinimapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, ModConfig.waypointYLevelAdvancedLocator, targetZ))
 									count++;
 							}
 							break;

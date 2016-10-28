@@ -10,6 +10,7 @@ import net.minecraftforge.event.world.ChunkDataEvent.Load;
 import pers.gwyog.gtveinlocator.compat.JourneyMapHelper;
 import pers.gwyog.gtveinlocator.compat.LoadedModHelper;
 import pers.gwyog.gtveinlocator.compat.XaeroMinimapHelper;
+import pers.gwyog.gtveinlocator.config.ModConfig;
 import pers.gwyog.gtveinlocator.util.GTOreLayerHelper;
 
 public class ClientWaypointPacketHandler implements IMessageHandler<ClientWaypointPacket, IMessage> {
@@ -19,7 +20,7 @@ public class ClientWaypointPacketHandler implements IMessageHandler<ClientWaypoi
 		if (LoadedModHelper.supportMod == null) 
 			return null;
 		else if (!LoadedModHelper.failedCompat) {
-			int targetY = message.posY==-1? 70: message.posY;
+			int targetY = message.posY==-1? ModConfig.waypointYLevelEliteLocator: message.posY;
 			switch(LoadedModHelper.supportMod) {
 			case JOURNEYMAP:
 				if (!JourneyMapHelper.isWaypointExist(message.posX, message.posZ, message.dimId, true))

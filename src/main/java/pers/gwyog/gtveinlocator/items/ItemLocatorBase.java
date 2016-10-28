@@ -13,33 +13,39 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import pers.gwyog.gtveinlocator.GTVeinLocator;
+import pers.gwyog.gtveinlocator.config.ModConfig;
 
 public class ItemLocatorBase extends Item implements IElectricItem, IBoxable {
 	protected final double maxCharge; 
 	protected final double transferLimit; 
 	protected final int tier;
-	protected boolean showDuribilityBar;
+	protected boolean useEnergy;
 	
-	public ItemLocatorBase(String name, double maxCharge, double transferLimit, int tier, boolean showDuribilityBar) {
+	public ItemLocatorBase(String name, double maxCharge, double transferLimit, int tier, boolean useEnergy) {
 		this.setUnlocalizedName(GTVeinLocator.MODID + "." + name);
 		this.setTextureName(GTVeinLocator.MODID + ":" + name);
-		this.maxCharge = maxCharge;
-		this.transferLimit = transferLimit;
-		this.tier = tier;
-		this.showDuribilityBar = showDuribilityBar;
-		this.setMaxDamage(27);
+		this.maxCharge = useEnergy? maxCharge: 1;
+		this.transferLimit = useEnergy? transferLimit: 1;
+		this.tier = useEnergy? tier: 1;
+		this.useEnergy = useEnergy;
+		if (useEnergy) {
+			this.setMaxDamage(27);
+			this.setNoRepair();
+		}
 		this.setMaxStackSize(1);
-		this.setNoRepair();
 	}
 
 	@Override
 	public double getDurabilityForDisplay(ItemStack stack) {
-		return 1D - (ElectricItem.manager.getCharge(stack) / getMaxCharge(stack));
+		if (useEnergy)
+			return 1D - (ElectricItem.manager.getCharge(stack) / getMaxCharge(stack));
+		else
+			return super.getDurabilityForDisplay(stack);
 	}
 	
 	@Override
 	public boolean showDurabilityBar(ItemStack stack) {
-		return showDuribilityBar;
+		return useEnergy;
 	}
 	
 	@Override
@@ -50,17 +56,23 @@ public class ItemLocatorBase extends Item implements IElectricItem, IBoxable {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
-	    ItemStack itemStack = new ItemStack(this, 1);
-	    if (getChargedItem(itemStack) == this) {
-	      ItemStack charged = new ItemStack(this, 1);
-	      ElectricItem.manager.charge(charged, Double.POSITIVE_INFINITY, Integer.MAX_VALUE, true, false);
-	      list.add(charged);
-	    }
-	    if (getEmptyItem(itemStack) == this) {
-	      ItemStack charged = new ItemStack(this, 1);
-	      ElectricItem.manager.charge(charged, 0.0D, Integer.MAX_VALUE, true, false);
-	      list.add(charged);
-	    }
+		if (useEnergy) {
+		    ItemStack itemStack = new ItemStack(this, 1);
+		    if (getChargedItem(itemStack) == this) {
+		      ItemStack charged = new ItemStack(this, 1);
+		      ElectricItem.manager.charge(charged, Double.POSITIVE_INFINITY, Integer.MAX_VALUE, true, false);
+		      list.add(charged);
+		    }
+		    if (getEmptyItem(itemStack) == this) {
+		      ItemStack charged = new ItemStack(this, 1);
+		      ElectricItem.manager.charge(charged, 0.0D, Integer.MAX_VALUE, true, false);
+		      list.add(charged);
+		    }
+		}
+		else {
+			ItemStack itemStack = new ItemStack(this, 1);
+			list.add(itemStack);
+		}
 	}
 	
 	@Override
