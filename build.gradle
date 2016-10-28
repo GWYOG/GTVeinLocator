@@ -17,9 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0.2"
+version = "1.0.3"
 group= "pers.gwyog.gtveinlocator"
 archivesBaseName = "gtveinlocator"
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
