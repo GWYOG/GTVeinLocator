@@ -103,7 +103,7 @@ public class ModConfig {
 		 advancedVeinLocatorTransferLimit = getSafeDoubleFromProperty(propertyAdvancedVeinLocatorTransferLimit, 1.0D, Double.MAX_VALUE);
 		 Property propertyAdvancedVeinLocatorTier = config.get("Locator Data", "advancedVeinLocatorTier", 2, advancedVeinLocatorTierDes);
 		 advancedVeinLocatorTier = getSafeIntFromProperty(propertyAdvancedVeinLocatorTier, 1, Integer.MAX_VALUE);
-		 Property propertyAdvancedVeinLocatorSingleUseCost = config.get("Locator Data", "advancedVeinLocatorSingleUseCost", 15000.0D, advancedVeinLocatorSingleUseCostDes);
+		 Property propertyAdvancedVeinLocatorSingleUseCost = config.get("Locator Data", "advancedVeinLocatorSingleUseCost", 8000.0D, advancedVeinLocatorSingleUseCostDes);
 		 advancedVeinLocatorSingleUseCost = getSafeDoubleFromProperty(propertyAdvancedVeinLocatorSingleUseCost, 0.0D, advancedVeinLocatorMaxCharge);
 		 Property propertyEliteVeinLocatorMaxCharge = config.get("Locator Data", "eliteVeinLocatorMaxCharge", 10000000.0D, eliteVeinLocatorMaxChargeDes);
 		 eliteVeinLocatorMaxCharge = getSafeDoubleFromProperty(propertyEliteVeinLocatorMaxCharge, 1.0D, Double.MAX_VALUE);
@@ -111,7 +111,7 @@ public class ModConfig {
 		 eliteVeinLocatorTransferLimit = getSafeDoubleFromProperty(propertyEliteVeinLocatorTransferLimit, 1.0D, Double.MAX_VALUE);
 		 Property propertyEliteVeinLocatorTier = config.get("Locator Data", "eliteVeinLocatorTier", 3, eliteVeinLocatorTierDes);
 		 eliteVeinLocatorTier = getSafeIntFromProperty(propertyEliteVeinLocatorTier, 1, Integer.MAX_VALUE);
-		 Property propertyEliteVeinLocatorSingleUseCost = config.get("Locator Data", "eliteVeinLocatorSingleUseCost", 200000.0D, eliteVeinLocatorSingleUseCostDes);
+		 Property propertyEliteVeinLocatorSingleUseCost = config.get("Locator Data", "eliteVeinLocatorSingleUseCost", 64000.0D, eliteVeinLocatorSingleUseCostDes);
 		 eliteVeinLocatorSingleUseCost = getSafeDoubleFromProperty(propertyEliteVeinLocatorSingleUseCost, 0.0D, eliteVeinLocatorMaxCharge);
 	
 		 

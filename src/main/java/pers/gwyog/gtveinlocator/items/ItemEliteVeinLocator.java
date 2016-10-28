@@ -51,7 +51,7 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 				player.addChatMessage(new ChatComponentTranslation("chat.switch_range", 4-searchRange, 4-searchRange));
 		else {
 			if (useEnergy)
-				if (!ElectricItem.manager.use(stack, ModConfig.advancedVeinLocatorSingleUseCost*searchRange*searchRange, player)) {
+				if (!ElectricItem.manager.use(stack, ModConfig.eliteVeinLocatorSingleUseCost*searchRange*searchRange, player)) {
 					return stack;
 			}
 			if (!world.isRemote) {
