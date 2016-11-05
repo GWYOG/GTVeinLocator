@@ -43,6 +43,7 @@ public class ModConfig {
 	 public static boolean recipeVeinLocatorDisabled;
 	 public static boolean recipeAdvancedVeinLocatorDisabled;
 	 public static boolean recipeEliteVeinLocatorDisabled;
+	 public static boolean creativeTabIconCompass;
 	 
 	 public ModConfig(FMLPreInitializationEvent event) {
 		 logger = event.getModLog();
@@ -61,6 +62,7 @@ public class ModConfig {
 	     config.addCustomCategoryComment("Compatibility", "Things that are related with other mods can be configured here.");
 	     config.addCustomCategoryComment("Loot Tweaks", "You can set if the locators would generate in the loot chests and the possibility to find them.\nTips: The basic name of the chests are: \n    mineshaftCorridor, pyramidDesertyChest, pyramidJungleChest, pyramidJungleDispenser \n    strongholdCorridor, strongholdLibrary, strongholdCrossing, villageBlacksmith \n    bonusChest, dungeonChest \nNote: If you want to make specific locator appear in multiple kinds of loot-chests, you should use MineTweaker.");
 	     config.addCustomCategoryComment("Recipe Disabled", "You can disable the recipe of specific locator here.");
+	     config.addCustomCategoryComment("Creative Tab Icon", "For those whose client crashes everytime switching to GTVL's creative tab, you can now change the icon to minecraft's compass to avoid crashing.");
 	     
 	     //locator enabled
 		 String veinLocatorEnabledDes = "Set to false will disable the basic vein locator in-game which means you won't see it any more.";
@@ -165,6 +167,10 @@ public class ModConfig {
 		 recipeAdvancedVeinLocatorDisabled = config.get("Recipe Disabled", "recipeAdvancedVeinLocatorDisabled", false, recipeAdvancedVeinLocatorDisabledDes).getBoolean();
 		 recipeEliteVeinLocatorDisabled = config.get("Recipe Disabled", "recipeEliteVeinLocatorDisabled", false, recipeEliteVeinLocatorDisabledDes).getBoolean();
 		 
+		 
+		 //creative tab icon
+		 String creativeTabCompassDes = "Set this to true will set GTVL's creative icon to minecraft's compass";
+		 creativeTabIconCompass = config.get("Creative Tab Icon", "creativeTabIconCompass", false, creativeTabCompassDes).getBoolean();
 		 
 		 config.save();        
 		 logger.info("Finished loading config.");

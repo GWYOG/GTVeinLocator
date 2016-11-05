@@ -10,7 +10,9 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ic2.api.item.ElectricItem;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import pers.gwyog.gtveinlocator.config.ModConfig;
@@ -29,11 +31,19 @@ public class GTVeinLocator {
     @Mod.Instance("gtveinlocator")
     public static GTVeinLocator instance;
     
-    public static CreativeTabs tabGTVeinLocator = new CreativeTabs("GTVeinLocator") {
+    public static CreativeTabs tabGTVeinLocator = new CreativeTabs("GTVeinLocator") {  	
+    	@Override
+		@SideOnly(Side.CLIENT)
+		public Item getTabIconItem() {
+			return null;
+		} 
+		
         @Override
         @SideOnly(Side.CLIENT)
-        public Item getTabIconItem() {
-            return ModItems.itemVeinLocator;
+        public ItemStack getIconItemStack() {
+        	ItemStack chargedVeinLocator = new ItemStack(ModItems.itemVeinLocator, 1);
+		    ElectricItem.manager.charge(chargedVeinLocator, Double.POSITIVE_INFINITY, Integer.MAX_VALUE, true, false);
+			return chargedVeinLocator;
         }
     };
     

@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IBoxable;
 import ic2.api.item.IElectricItem;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -45,7 +46,7 @@ public class ItemLocatorBase extends Item implements IElectricItem, IBoxable {
 	
 	@Override
 	public boolean showDurabilityBar(ItemStack stack) {
-		return useEnergy;
+		return useEnergy && (ElectricItem.manager.getCharge(stack) != getMaxCharge(stack));
 	}
 	
 	@Override
@@ -64,9 +65,9 @@ public class ItemLocatorBase extends Item implements IElectricItem, IBoxable {
 		      list.add(charged);
 		    }
 		    if (getEmptyItem(itemStack) == this) {
-		      ItemStack charged = new ItemStack(this, 1);
-		      ElectricItem.manager.charge(charged, 0.0D, Integer.MAX_VALUE, true, false);
-		      list.add(charged);
+		      ItemStack disCharged = new ItemStack(this, 1);
+		      ElectricItem.manager.charge(disCharged, 0.0D, Integer.MAX_VALUE, true, false);
+		      list.add(disCharged);
 		    }
 		}
 		else {
