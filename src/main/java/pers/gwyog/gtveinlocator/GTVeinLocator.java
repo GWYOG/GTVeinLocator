@@ -28,7 +28,7 @@ public class GTVeinLocator {
     @SidedProxy(clientSide="pers.gwyog.gtveinlocator.proxies.ClientProxy", serverSide="pers.gwyog.gtveinlocator.proxies.ServerProxy")
     public static CommonProxy proxy;
     
-    @Mod.Instance("gtveinlocator")
+    @Mod.Instance(MODID)
     public static GTVeinLocator instance;
     
     public static CreativeTabs tabGTVeinLocator = new CreativeTabs("GTVeinLocator") {  	

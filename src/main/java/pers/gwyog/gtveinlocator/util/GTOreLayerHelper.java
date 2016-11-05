@@ -59,39 +59,39 @@ public class GTOreLayerHelper {
 		
 		// initialization starts
 		if (basicSupport) {
-			GTVeinNameHelper.registerVeinName("ore.mix.empty");
-			GTVeinNameHelper.registerVeinName("ore.mix.unknown");
+			GTVeinNameHelper.registerVeinName("gtveinlocator.ore.mix.empty");
+			GTVeinNameHelper.registerVeinName("gtveinlocator.ore.mix.unknown");
 			for (GT_Worldgen_GT_Ore_Layer worldGen : GT_Worldgen_GT_Ore_Layer.sList) {
 				if (worldGen.mEnabled) {
-					GTVeinNameHelper.registerVeinName(worldGen.mWorldGenName);
+					GTVeinNameHelper.registerVeinName("gtveinlocator." + worldGen.mWorldGenName);
 					List<Short> componentList = new LinkedList<Short>();
 					componentList.add(worldGen.mPrimaryMeta);
 					componentList.add(worldGen.mSecondaryMeta);
 					componentList.add(worldGen.mBetweenMeta);
 					componentList.add(worldGen.mSporadicMeta);
 					if (worldGen.mOverworld) {
-						mapGTOverworldOreLayer.put(componentList, worldGen.mWorldGenName);
+						mapGTOverworldOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName);
 						minLevelOreOverworld = worldGen.mMinY<minLevelOreOverworld? worldGen.mMinY: minLevelOreOverworld;
 						maxLevelOreOverworld = worldGen.mMaxY>maxLevelOreOverworld? worldGen.mMaxY: maxLevelOreOverworld;
 					}
 					if (worldGen.mNether) {
-						mapGTNetherOreLayer.put(componentList, worldGen.mWorldGenName);
+						mapGTNetherOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName);
 						minLevelOreNether = worldGen.mMinY<minLevelOreNether? worldGen.mMinY: minLevelOreNether;
 						maxLevelOreNether = worldGen.mMaxY>maxLevelOreNether? worldGen.mMaxY: maxLevelOreNether;
 					}
 					if (worldGen.mEnd) {
-						mapGTEndOreLayer.put(componentList, worldGen.mWorldGenName);
+						mapGTEndOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName);
 						minLevelOreEnd = worldGen.mMinY<minLevelOreEnd? worldGen.mMinY: minLevelOreEnd;
 						maxLevelOreEnd = worldGen.mMaxY>maxLevelOreEnd? worldGen.mMaxY: maxLevelOreEnd;
 					}
 					if (gcSupport) {
 						if (worldGen.mMoon) {
-							mapGTMoonOreLayer.put(componentList, worldGen.mWorldGenName); 
+							mapGTMoonOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName); 
 							minLevelOreMoon = worldGen.mMinY<minLevelOreMoon? worldGen.mMinY: minLevelOreMoon;
 							maxLevelOreMoon = worldGen.mMaxY>maxLevelOreMoon? worldGen.mMaxY: maxLevelOreMoon;
 						}
 						if (worldGen.mMars) {
-							mapGTMarsOreLayer.put(componentList, worldGen.mWorldGenName); 
+							mapGTMarsOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName); 
 							minLevelOreMars = worldGen.mMinY<minLevelOreMars? worldGen.mMinY: minLevelOreMars;
 							maxLevelOreMars = worldGen.mMaxY>maxLevelOreMars? worldGen.mMaxY: maxLevelOreMars;
 						}
@@ -153,14 +153,14 @@ public class GTOreLayerHelper {
 			return judgeOreLayerName(list, mapGTMarsOreLayer);
 		default:			
 			//never return this
-			return "ore.mix.unknown";
+			return "gtveinlocator.ore.mix.unknown";
 		}
 	}
 		
 	public static String judgeOreLayerName(List<Short> list, HashMap<List<Short>, String> map) {
 		boolean flag;
 		if (list==null || list.isEmpty())
-			return "ore.mix.empty";	
+			return "gtveinlocator.ore.mix.empty";	
 		for (List<Short> componentList : map.keySet()) {
 			flag = true;
 			//judge if variable componentList contains variable list
@@ -176,7 +176,7 @@ public class GTOreLayerHelper {
 				return map.get(componentList);
 			}
 		}
-		return "ore.mix.unknown";
+		return "gtveinlocator.ore.mix.unknown";
 	}
 	
 	public static boolean advancedJudge(List<Short>list, List<Short>componentList) {

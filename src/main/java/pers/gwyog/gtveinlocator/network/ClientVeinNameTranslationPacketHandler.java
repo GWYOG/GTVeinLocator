@@ -25,7 +25,7 @@ public class ClientVeinNameTranslationPacketHandler implements IMessageHandler<C
 				localizedText += ", ";
 			localizedText += I18n.format(str);
 		}
-		Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("chat.found_info", localizedText));
+		Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("chat.gtveinlocator.found_info", localizedText));
 		return null;
 	}
 

@@ -35,7 +35,7 @@ public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 			if (!world.isRemote)
 				switchMode(stack, searchRange);
 			else
-				player.addChatMessage(new ChatComponentText(I18n.format("chat.switch_range", 4-searchRange, 4-searchRange)));
+				player.addChatMessage(new ChatComponentText(I18n.format("chat.gtveinlocator.switch_range", 4-searchRange, 4-searchRange)));
 		else if (!player.isSneaking()) {
 			if (useEnergy)
 				if (!ElectricItem.manager.use(stack, ModConfig.advancedVeinLocatorSingleUseCost*searchRange*searchRange, player)) 
@@ -43,15 +43,15 @@ public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 			if (world.isRemote) {
 				SupportModsEnum supportMod = LoadedModHelper.supportMod;
 				if (!ClientVeinNameHelper.basicSupport) {
-					player.addChatMessage(new ChatComponentText(I18n.format("modcompat.oldversion_gt.info")));
+					player.addChatMessage(new ChatComponentText(I18n.format("modcompat.gtveinlocator.oldversion_gt.info")));
 					return stack;
 				}
 				if (supportMod == null) {
-					player.addChatMessage(new ChatComponentText(I18n.format("modcompat.no_minimap.info")));
+					player.addChatMessage(new ChatComponentText(I18n.format("modcompat.gtveinlocator.no_minimap.info")));
 					return stack;
 				}
 				else if (LoadedModHelper.failedCompat) {
-					player.addChatMessage(new ChatComponentTranslation("modcompat.oldversion_minimap.info", supportMod.getName()));
+					player.addChatMessage(new ChatComponentTranslation("modcompat.gtveinlocator.oldversion_minimap.info", supportMod.getName()));
 					return stack;
 				}
 				int indexX = getClosestIndex(player.posX);
@@ -66,18 +66,18 @@ public class ItemAdvancedVeinLocator extends ItemVeinLocator {
 						switch (supportMod) {
 						case JOURNEYMAP:
 							if (!JourneyMapHelper.isWaypointExist(targetX, targetZ, dimId, false))
-								if(JourneyMapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, ModConfig.waypointYLevelAdvancedLocator, targetZ, dimId))
+								if(JourneyMapHelper.addWaypoint(I18n.format("waypoint.gtveinlocator.unknown.name"), targetX, ModConfig.waypointYLevelAdvancedLocator, targetZ, dimId))
 									count++;
 							break;
 						case XAEROMINIMAP:
 							if (!XaeroMinimapHelper.isWaypointExist(targetX, targetZ, false)) {
-								if(XaeroMinimapHelper.addWaypoint(I18n.format("waypoint.unknown.name"), targetX, ModConfig.waypointYLevelAdvancedLocator, targetZ))
+								if(XaeroMinimapHelper.addWaypoint(I18n.format("waypoint.gtveinlocator.unknown.name"), targetX, ModConfig.waypointYLevelAdvancedLocator, targetZ))
 									count++;
 							}
 							break;
 						}
 					}
-				player.addChatMessage(new ChatComponentText(I18n.format("chat.info1", count, supportMod.getName())));
+				player.addChatMessage(new ChatComponentText(I18n.format("chat.gtveinlocator.info1", count, supportMod.getName())));
 			}
 		}
 		return stack;

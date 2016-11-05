@@ -48,7 +48,7 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 			if (!world.isRemote)
 				switchMode(stack, searchRange);
 			else
-				player.addChatMessage(new ChatComponentTranslation("chat.switch_range", 4-searchRange, 4-searchRange));
+				player.addChatMessage(new ChatComponentTranslation("chat.gtveinlocator.switch_range", 4-searchRange, 4-searchRange));
 		else {
 			if (useEnergy)
 				if (!ElectricItem.manager.use(stack, ModConfig.eliteVeinLocatorSingleUseCost*searchRange*searchRange, player)) {
@@ -71,7 +71,7 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
 						nameUnlocalitzed = GTOreLayerHelper.judgeOreLayerName(judgeVeinComponent(world, targetX, targetY, targetZ), getWorldNameEnum(worldProvider));
 						GTVLNetwork.INSTANCE.sendTo(new ClientWaypointPacket(nameUnlocalitzed, targetX, targetY, targetZ, dimId), (EntityPlayerMP)player);
 						count++;
-						if (!nameUnlocalitzed.equals("ore.mix.empty") && !nameUnlocalitzed.equals("ore.mix.unknown")) {
+						if (!nameUnlocalitzed.equals("gtveinlocator.ore.mix.empty") && !nameUnlocalitzed.equals("gtveinlocator.ore.mix.unknown")) {
 							veinCount++;
 							if (foundVeinNames.isEmpty()) {
 								foundVeinNames = nameUnlocalitzed;

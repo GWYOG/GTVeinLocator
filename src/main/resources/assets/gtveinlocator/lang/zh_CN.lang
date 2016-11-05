@@ -4,55 +4,56 @@ item.gtveinlocator.advancedVeinLocator.name=高级GT矿脉定位器
 item.gtveinlocator.eliteVeinLocator.name=精英GT矿脉定位器
 
 #waypoint for journeymap
-waypoint.unknown.name=未知
+waypoint.gtveinlocator.unknown.name=未知
 
 #chat messages
-chat.switch_range=搜索范围已被设定为%d*%d.
-chat.showing_message=附近%d个矿脉的坐标是:
-chat.info1=附近%d个可能矿脉的路径点已被添加至%s中!
-chat.info2=在%2$d*%3$d区域中发现%1$d个矿脉,路径点已被添加至%4$s中!
-chat.found_info=发现矿脉: %s
+chat.gtveinlocator.switch_range=搜索范围已被设定为%d*%d.
+chat.gtveinlocator.showing_message=附近%d个矿脉的坐标是:
+chat.gtveinlocator.info1=附近%d个可能矿脉的路径点已被添加至%s中!
+chat.gtveinlocator.info2=在%2$d*%3$d区域中发现%1$d个矿脉,路径点已被添加至%4$s中!
+chat.gtveinlocator.found_info=发现矿脉: %s
 
 #mod compat messages
-modcompat.oldversion_gt.info=你的格雷科技版本可能有点落后，反馈此bug前请先将它更新到最新版.
-modcompat.no_minimap.info=未找到兼容的小地图mod，请安装后再使用此物品.
-modcompat.oldversion_minimap.info=兼容%s时发生错误！反馈此bug前请先将该小地图mod更新到最新版.
+modcompat.gtveinlocator.oldversion_gt.info=你的格雷科技版本可能有点落后，反馈此bug前请先将它更新到最新版.
+modcompat.gtveinlocator.no_minimap.info=未找到兼容的小地图mod，请安装后再使用此物品.
+modcompat.gtveinlocator.oldversion_minimap.info=兼容%s时发生错误！反馈此bug前请先将该小地图mod更新到最新版.
 
 #vein names
-ore.mix.empty=空
-ore.mix.unknown=未知
-ore.mix.naquadah=硅岩
-ore.mix.lignite=褐煤
-ore.mix.coal=煤
-ore.mix.magnetite=磁铁
-ore.mix.gold=金
-ore.mix.iron=铁
-ore.mix.cassiterite=锡石
-ore.mix.tetrahedrite=黝铜
-ore.mix.netherquartz=下届石英
-ore.mix.sulfur=硫
-ore.mix.copper=铜
-ore.mix.bauxite=铝土
-ore.mix.salts=岩盐
-ore.mix.redstone=红石
-ore.mix.soapstone=皂石
-ore.mix.nickel=镍
-ore.mix.platinum=铂
-ore.mix.pitchblende=沥青铀
-ore.mix.uranium=铀
-ore.mix.monazite=独居石
-ore.mix.molybdenum=钼
-ore.mix.tungstate=钨酸盐
-ore.mix.sapphire=蓝宝石
-ore.mix.manganese=锰
-ore.mix.quartz=石英岩
-ore.mix.diamond=钻石
-ore.mix.olivine=橄榄石
-ore.mix.apatite=磷灰石
-ore.mix.galena=方铅矿
-ore.mix.lapis=青金石
-ore.mix.beryllium=铍
-ore.mix.oilsand=油砂
+gtveinlocator.ore.mix.empty=空
+gtveinlocator.ore.mix.unknown=未知
+gtveinlocator.ore.mix.naquadah=硅岩
+gtveinlocator.ore.mix.lignite=褐煤
+gtveinlocator.ore.mix.coal=煤
+gtveinlocator.ore.mix.magnetite=磁铁
+gtveinlocator.ore.mix.gold=金
+gtveinlocator.ore.mix.iron=铁
+gtveinlocator.ore.mix.cassiterite=锡石
+gtveinlocator.ore.mix.tetrahedrite=黝铜
+gtveinlocator.ore.mix.netherquartz=下届石英
+gtveinlocator.ore.mix.sulfur=硫
+gtveinlocator.ore.mix.copper=铜
+gtveinlocator.ore.mix.bauxite=铝土
+gtveinlocator.ore.mix.salts=岩盐
+gtveinlocator.ore.mix.redstone=红石
+gtveinlocator.ore.mix.soapstone=皂石
+gtveinlocator.ore.mix.nickel=镍
+gtveinlocator.ore.mix.platinum=铂
+gtveinlocator.ore.mix.pitchblende=沥青铀
+gtveinlocator.ore.mix.uranium=铀
+gtveinlocator.ore.mix.monazite=独居石
+gtveinlocator.ore.mix.molybdenum=钼
+gtveinlocator.ore.mix.tungstate=钨酸盐
+gtveinlocator.ore.mix.sapphire=蓝宝石
+gtveinlocator.ore.mix.manganese=锰
+gtveinlocator.ore.mix.quartz=石英岩
+gtveinlocator.ore.mix.diamond=钻石
+gtveinlocator.ore.mix.olivine=橄榄石
+gtveinlocator.ore.mix.apatite=磷灰石
+gtveinlocator.ore.mix.galena=方铅矿
+gtveinlocator.ore.mix.lapis=青金石
+gtveinlocator.ore.mix.beryllium=铍
+gtveinlocator.ore.mix.oilsand=油砂
+
 
 #creative tabs
 itemGroup.GTVeinLocator=格雷科技矿脉定位器

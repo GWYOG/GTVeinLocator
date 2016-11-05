@@ -43,7 +43,7 @@ public class JourneyMapHelper {
 	    if (forceAdd) {
 	    	for (Waypoint wp : waypoints)
 	    		if (wp.getX()==posX && wp.getZ()==posZ && wp.getDimensions().contains(dimId))
-	    			if (wp.getName().equals(I18n.format("ore.mix.empty")) || wp.getName().equals(I18n.format("ore.mix.unknown")))
+	    			if (wp.getName().equals(I18n.format("gtveinlocator.ore.mix.empty")) || wp.getName().equals(I18n.format("gtveinlocator.ore.mix.unknown")))
 	    				WaypointStore.instance().remove(wp);
 	    			else
 	    				return true;

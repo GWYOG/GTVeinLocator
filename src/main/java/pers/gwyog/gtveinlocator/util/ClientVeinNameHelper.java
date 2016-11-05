@@ -31,11 +31,11 @@ public class ClientVeinNameHelper {
 			
 			//map initialization start
 			if (basicSupport) {
-				GTVeinNameHelper.registerVeinName("ore.mix.empty");
-				GTVeinNameHelper.registerVeinName("ore.mix.unknown");
+				GTVeinNameHelper.registerVeinName("gtveinlocator.ore.mix.empty");
+				GTVeinNameHelper.registerVeinName("gtveinlocator.ore.mix.unknown");
 				for (GT_Worldgen_GT_Ore_Layer worldGen : GT_Worldgen_GT_Ore_Layer.sList)
 					if (worldGen.mEnabled) 
-						GTVeinNameHelper.registerVeinName(worldGen.mWorldGenName);
+						GTVeinNameHelper.registerVeinName("gtveinlocator." + worldGen.mWorldGenName);
 			}
 			mapInit = true;
 		}

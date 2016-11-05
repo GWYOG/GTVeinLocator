@@ -49,7 +49,7 @@ public class XaeroMinimapHelper {
 			while (iter.hasNext()) {
 				Waypoint wp = iter.next();
 				if (wp.x==posX && wp.z==posZ)
-					if (wp.getName().equals(I18n.format("ore.mix.empty")) || wp.getName().equals(I18n.format("ore.mix.unknown")))
+					if (wp.getName().equals(I18n.format("gtveinlocator.ore.mix.empty")) || wp.getName().equals(I18n.format("gtveinlocator.ore.mix.unknown")))
 						iter.remove();
 					else
 						return true;

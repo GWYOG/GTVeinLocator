@@ -29,7 +29,7 @@ public class ItemVeinLocator extends ItemLocatorBase {
 			if (!world.isRemote)
 				switchMode(stack, searchRange);
 			else
-				player.addChatMessage(new ChatComponentText(I18n.format("chat.switch_range", 4-searchRange, 4-searchRange)));
+				player.addChatMessage(new ChatComponentText(I18n.format("chat.gtveinlocator.switch_range", 4-searchRange, 4-searchRange)));
 		}
 		else if (!player.isSneaking()) {
 			if (useEnergy)
@@ -38,7 +38,7 @@ public class ItemVeinLocator extends ItemLocatorBase {
 			if (world.isRemote) {
 				int indexX = getClosestIndex(player.posX);
 				int indexZ = getClosestIndex(player.posZ);
-				player.addChatMessage(new ChatComponentText(I18n.format("chat.showing_message", searchRange*searchRange)));
+				player.addChatMessage(new ChatComponentText(I18n.format("chat.gtveinlocator.showing_message", searchRange*searchRange)));
 				String message = "";
 				for (int i=(1-searchRange)/2; i<(1+searchRange)/2; i++) {
 					for (int j=(1-searchRange)/2; j<(1+searchRange)/2; j++)

@@ -4,55 +4,56 @@ item.gtveinlocator.advancedVeinLocator.name=Advanced GT Vein-Locator
 item.gtveinlocator.eliteVeinLocator.name=Elite GT Vein-Locator
 
 #waypoint for journeymap
-waypoint.unknown.name=Unknown
+waypoint.gtveinlocator.unknown.name=Unknown
 
 #chat messages
-chat.switch_range=The searching range has been set to %d*%d.
-chat.showing_message=The nearby %d veins' coordinates are:
-chat.info1=%d waypoints have been added to %s!
-chat.info2=Found %1$d veins in %2$d*%3$d area, the waypoints have been added to %4$s!
-chat.found_info=Found veins: %s
+chat.gtveinlocator.switch_range=The searching range has been set to %d*%d.
+chat.gtveinlocator.showing_message=The nearby %d veins' coordinates are:
+chat.gtveinlocator.info1=%d waypoints have been added to %s!
+chat.gtveinlocator.info2=Found %1$d veins in %2$d*%3$d area, the waypoints have been added to %4$s!
+chat.gtveinlocator.found_info=Found veins: %s
 
 #mod compat messages
-modcompat.oldversion_gt.info=Gregtech's version may be out-of-date, please update it first before reporting the bug.
-modcompat.no_minimap.info=Found no compatible minimap mod, please install one before using this item. 
-modcompat.oldversion_minimap.info=Failed to add compatibility for %s, please update this mod first before reporting the bug. 
+modcompat.gtveinlocator.oldversion_gt.info=Gregtech's version may be out-of-date, please update it first before reporting the bug.
+modcompat.gtveinlocator.no_minimap.info=Found no compatible minimap mod, please install one before using this item. 
+modcompat.gtveinlocator.oldversion_minimap.info=Failed to add compatibility for %s, please update this mod first before reporting the bug. 
 
 #vein names
-ore.mix.empty=Empty
-ore.mix.unknown=Unknown
-ore.mix.naquadah=Naquadah
-ore.mix.lignite=Lignite
-ore.mix.coal=Coal
-ore.mix.magnetite=Magnetite
-ore.mix.gold=Gold
-ore.mix.iron=Iron
-ore.mix.cassiterite=Cassiterite
-ore.mix.tetrahedrite=Tetrahedrite
-ore.mix.netherquartz=Nether Quartz
-ore.mix.sulfur=Sulfur
-ore.mix.copper=Copper
-ore.mix.bauxite=Bauxite
-ore.mix.salts=Salts
-ore.mix.redstone=Redstone
-ore.mix.soapstone=Soapstone
-ore.mix.nickel=Nickel
-ore.mix.platinum=Platinum
-ore.mix.pitchblende=Pitchblends
-ore.mix.uranium=Uranium
-ore.mix.monazite=Monazite
-ore.mix.molybdenum=Molybdenum
-ore.mix.tungstate=Tungstate
-ore.mix.sapphire=Sapphire
-ore.mix.manganese=Manganese
-ore.mix.quartz=Quartz
-ore.mix.diamond=Diamond
-ore.mix.olivine=Olivine
-ore.mix.apatite=Apatite
-ore.mix.galena=Galena
-ore.mix.lapis=Lapis
-ore.mix.beryllium=Beryllium
-ore.mix.oilsand=Oilsand
+gtveinlocator.ore.mix.empty=Empty
+gtveinlocator.ore.mix.unknown=Unknown
+gtveinlocator.ore.mix.naquadah=Naquadah
+gtveinlocator.ore.mix.lignite=Lignite
+gtveinlocator.ore.mix.coal=Coal
+gtveinlocator.ore.mix.magnetite=Magnetite
+gtveinlocator.ore.mix.gold=Gold
+gtveinlocator.ore.mix.iron=Iron
+gtveinlocator.ore.mix.cassiterite=Cassiterite
+gtveinlocator.ore.mix.tetrahedrite=Tetrahedrite
+gtveinlocator.ore.mix.netherquartz=Nether Quartz
+gtveinlocator.ore.mix.sulfur=Sulfur
+gtveinlocator.ore.mix.copper=Copper
+gtveinlocator.ore.mix.bauxite=Bauxite
+gtveinlocator.ore.mix.salts=Salts
+gtveinlocator.ore.mix.redstone=Redstone
+gtveinlocator.ore.mix.soapstone=Soapstone
+gtveinlocator.ore.mix.nickel=Nickel
+gtveinlocator.ore.mix.platinum=Platinum
+gtveinlocator.ore.mix.pitchblende=Pitchblends
+gtveinlocator.ore.mix.uranium=Uranium
+gtveinlocator.ore.mix.monazite=Monazite
+gtveinlocator.ore.mix.molybdenum=Molybdenum
+gtveinlocator.ore.mix.tungstate=Tungstate
+gtveinlocator.ore.mix.sapphire=Sapphire
+gtveinlocator.ore.mix.manganese=Manganese
+gtveinlocator.ore.mix.quartz=Quartz
+gtveinlocator.ore.mix.diamond=Diamond
+gtveinlocator.ore.mix.olivine=Olivine
+gtveinlocator.ore.mix.apatite=Apatite
+gtveinlocator.ore.mix.galena=Galena
+gtveinlocator.ore.mix.lapis=Lapis
+gtveinlocator.ore.mix.beryllium=Beryllium
+gtveinlocator.ore.mix.oilsand=Oilsand
+
 
 #creative tab
 itemGroup.GTVeinLocator=GregTech Vein-Locator

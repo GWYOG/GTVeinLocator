@@ -14,18 +14,18 @@ public class ClientInfoMessageTranslationPacketHandler implements IMessageHandle
 	public IMessage onMessage(ClientInfoMessageTranslationPacket message, MessageContext ctx) {
 		SupportModsEnum supportMod = LoadedModHelper.supportMod;
 		if (supportMod == null) {
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("modcompat.no_minimap.info"));
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("modcompat.gtveinlocator.no_minimap.info"));
 			return null;
 		}
 		else if (LoadedModHelper.failedCompat) {
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("modcompat.oldversion_minimap.info", supportMod.getName()));
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("modcompat.gtveinlocator.oldversion_minimap.info", supportMod.getName()));
 			return null;
 		}
 		int[] intParaArray = message.intParaArray;
 		int infoIndex = message.infoIndex;
 		switch (infoIndex) {
 		case 2:
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("chat.info"+infoIndex, intParaArray[0], intParaArray[1], intParaArray[2], supportMod.getName()));
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("chat.gtveinlocator.info"+infoIndex, intParaArray[0], intParaArray[1], intParaArray[2], supportMod.getName()));
 			break;
 		default:
 			break;
