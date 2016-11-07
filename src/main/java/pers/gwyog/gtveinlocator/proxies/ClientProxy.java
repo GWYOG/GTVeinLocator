@@ -23,7 +23,7 @@ public class ClientProxy extends CommonProxy{
     @Override
     public void init(FMLInitializationEvent e) {
         super.init(e);
-		FMLCommonHandler.instance().bus().register(new ClientVeinNameHelper());
+        FMLCommonHandler.instance().bus().register(new ClientVeinNameHelper());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ClientProxy extends CommonProxy{
         super.postInit(e);
         JourneyMapHelper.init();
         XaeroMinimapHelper.init();
-		LoadedModHelper.init();
+        LoadedModHelper.init();
     }
     
 }

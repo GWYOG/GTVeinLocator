@@ -13,25 +13,25 @@ import pers.gwyog.gtveinlocator.util.ClientVeinNameHelper;
 import pers.gwyog.gtveinlocator.util.GTOreLayerHelper;
 
 public class CommonProxy {
-	
-	public void preInit(FMLPreInitializationEvent e) {
-		new ModConfig(e);
+    
+    public void preInit(FMLPreInitializationEvent e) {
+        new ModConfig(e);
         ModItems.init();
         ModItems.registerItems();
         ModLoots.init();
         new GTVLNetwork();
-	}
-	
+    }
+    
     public void init(FMLInitializationEvent e) {
 
     }
 
     public void postInit(FMLPostInitializationEvent e) {
-    	
+        
     }
     
-   	public void onServerStart(FMLServerStartedEvent e) {
-   		GTOreLayerHelper.init();
-   	}
+       public void onServerStart(FMLServerStartedEvent e) {
+           GTOreLayerHelper.init();
+       }
 }
 

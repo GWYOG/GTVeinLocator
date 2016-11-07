@@ -20,30 +20,30 @@ import pers.gwyog.gtveinlocator.items.ItemVeinLocator;
 import pers.gwyog.gtveinlocator.util.GTOreLayerHelper;
 
 @Mod(modid = GTVeinLocator.MODID, name = GTVeinLocator.MODNAME, version = GTVeinLocator.VERSION, dependencies = "required-after:gregtech")
-public class GTVeinLocator {	
-	public static final String MODID = "gtveinlocator";
-	public static final String MODNAME = "GT Vein-Locator";
-	public static final String VERSION = "v1.0.4";
-	
+public class GTVeinLocator {    
+    public static final String MODID = "gtveinlocator";
+    public static final String MODNAME = "GT Vein-Locator";
+    public static final String VERSION = "v1.0.4";
+    
     @SidedProxy(clientSide="pers.gwyog.gtveinlocator.proxies.ClientProxy", serverSide="pers.gwyog.gtveinlocator.proxies.ServerProxy")
     public static CommonProxy proxy;
     
     @Mod.Instance(MODID)
     public static GTVeinLocator instance;
     
-    public static CreativeTabs tabGTVeinLocator = new CreativeTabs("GTVeinLocator") {  	
-    	@Override
-		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem() {
-			return null;
-		} 
-		
+    public static CreativeTabs tabGTVeinLocator = new CreativeTabs("GTVeinLocator") {      
+        @Override
+        @SideOnly(Side.CLIENT)
+        public Item getTabIconItem() {
+            return null;
+        } 
+        
         @Override
         @SideOnly(Side.CLIENT)
         public ItemStack getIconItemStack() {
-        	ItemStack chargedVeinLocator = new ItemStack(ModItems.itemVeinLocator, 1);
-		    ElectricItem.manager.charge(chargedVeinLocator, Double.POSITIVE_INFINITY, Integer.MAX_VALUE, true, false);
-			return chargedVeinLocator;
+            ItemStack chargedVeinLocator = new ItemStack(ModItems.itemVeinLocator, 1);
+            ElectricItem.manager.charge(chargedVeinLocator, Double.POSITIVE_INFINITY, Integer.MAX_VALUE, true, false);
+            return chargedVeinLocator;
         }
     };
     
@@ -64,7 +64,7 @@ public class GTVeinLocator {
     
     @EventHandler
     public void onServerStart(FMLServerStartedEvent e) {
-    	this.proxy.onServerStart(e);
+        this.proxy.onServerStart(e);
     }
     
 }
