@@ -23,7 +23,7 @@ import pers.gwyog.gtveinlocator.util.GTOreLayerHelper;
 public class GTVeinLocator {    
     public static final String MODID = "gtveinlocator";
     public static final String MODNAME = "GT Vein-Locator";
-    public static final String VERSION = "v1.0.4";
+    public static final String VERSION = "v1.0.5";
     
     @SidedProxy(clientSide="pers.gwyog.gtveinlocator.proxies.ClientProxy", serverSide="pers.gwyog.gtveinlocator.proxies.ServerProxy")
     public static CommonProxy proxy;
