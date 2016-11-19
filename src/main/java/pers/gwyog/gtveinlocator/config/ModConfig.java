@@ -28,6 +28,9 @@ public class ModConfig {
      public static double eliteVeinLocatorSingleUseCost;
      public static int waypointYLevelAdvancedLocator;
      public static int waypointYLevelEliteLocator;
+     public static int waypointColorJourneyMap;
+     public static int waypointColorXaeroMinimap;
+     public static String waypointSymbolXaeroMinimap;
      public static boolean lootVeinLocatorEnabled;
      public static String lootVeinLocatorChest;
      public static int lootVeinLocatorMinimumChance;
@@ -120,12 +123,19 @@ public class ModConfig {
          //compatibility
          String yLevelAdvancedLocatorDes = "The Y level of the auto-generated waypoints from the Advanced Vein-Locator.";   
          String yLevelEliteLocatorDes = "The Y level of the auto-generated empty or unknown waypoints from the Elite Vein-Locator.";   
+         String waypointColorJourneyMapDes = "The color of the waypoints on the JourneyMap added by advanced and elite locators. Please use hexadecimal. For example, 0xFFFFFF means white. Set to -1 will use the random color.";
+         String waypointColorXaeroMinimapDes = "The color of the waypoints on the XaeroMinimap added by advanced and elite locators. The range is 0-15, which corresponds with the 16 colors of XaeroMinimap's waypoints. Set to -1 will use the random color.";    
+         String waypointSymbolXaeroMinimapDes = "The symbol of the waypoints on the XaeroMinimap. That is to say, this is the string symbol shown above the waypoints in the minimap. The default value is 'X'.";
          Property propertyYLevelAdvancedLocator = config.get("Compatibility", "waypointYLevelAdvancedLocator", 70, yLevelAdvancedLocatorDes);
          waypointYLevelAdvancedLocator = getSafeIntFromProperty(propertyYLevelAdvancedLocator, 0, 255);
          Property propertyYLevelEliteLocator = config.get("Compatibility", "waypointYLevelEliteLocator", 70, yLevelEliteLocatorDes);
          waypointYLevelEliteLocator = getSafeIntFromProperty(propertyYLevelEliteLocator, 0, 255);               
-         
-         
+         Property propertyWaypointColorJourneyMap = config.get("Compatibility", "waypointColorJourneyMap", "-1", waypointColorJourneyMapDes);
+         waypointColorJourneyMap = getSafeColorFromProperty(propertyWaypointColorJourneyMap, -1, Integer.MAX_VALUE);
+         Property propertyWaypointColorXaeroMinimap = config.get("Compatibility", "waypointColorXaeroMinimap", -1, waypointColorXaeroMinimapDes);
+         waypointColorXaeroMinimap = getSafeIntFromProperty(propertyWaypointColorXaeroMinimap, -1, 15);
+         waypointSymbolXaeroMinimap = config.get("Compatibility", "waypointSymbolXaeroMinimap", "X", waypointSymbolXaeroMinimapDes).getString();
+        
          //loot tweaks
          String lootVeinLocatorEnabledDes = "Set to false will disable the chest-gen of the basic vein locators.";
          String lootVeinLocatorChestDes = "The name of the chest where the basic vein locator would generate. Tips: The name list can be found in the previous lines.";
@@ -197,5 +207,22 @@ public class ModConfig {
          }
          return temp;
      }
-
+     
+     public static int getSafeColorFromProperty(Property property, int min, int max) {
+    	 String colorString = property.getString();
+    	 if (colorString.startsWith("0x"))
+    		 colorString = colorString.replace("0x", "");
+    	 try {
+    		 int color = Integer.parseInt(colorString, 16);
+    		 if (color<min || color>max)
+    			 return -1;
+    		 else
+    			 return color;
+    	 }
+    	 catch (NumberFormatException e) {
+    		 property.setToDefault();
+    		 return -1;
+    	 }
+     }
+     
 }

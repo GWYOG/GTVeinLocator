@@ -13,6 +13,7 @@ import journeymap.client.model.Waypoint;
 import journeymap.client.properties.WaypointProperties;
 import journeymap.client.waypoint.WaypointStore;
 import net.minecraft.client.resources.I18n;
+import pers.gwyog.gtveinlocator.config.ModConfig;
 
 public class JourneyMapHelper {
     public static boolean failedCompat = true;
@@ -59,7 +60,11 @@ public class JourneyMapHelper {
     public static boolean addWaypoint(String name, int posX, int posY, int posZ, int dimId) {
         try {
             Waypoint waypoint = new Waypoint(name, posX, posY, posZ, Color.white, Waypoint.Type.Normal, dimId);
-            waypoint.setRandomColor();
+            int color = ModConfig.waypointColorJourneyMap;       
+            if (color == -1)
+            	waypoint.setRandomColor();
+            else      	
+            	waypoint.setColor(color);
             WaypointStore.instance().save(waypoint); 
         }
         catch (Throwable e) {

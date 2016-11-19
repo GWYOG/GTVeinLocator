@@ -16,6 +16,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.resources.I18n;
+import pers.gwyog.gtveinlocator.config.ModConfig;
 
 public class XaeroMinimapHelper {
     public static boolean failedCompat = true;
@@ -65,7 +66,8 @@ public class XaeroMinimapHelper {
     
     @SideOnly(Side.CLIENT)
     public static boolean addWaypoint(String name, int posX, int posY, int posZ) {
-        Waypoint wp = new Waypoint(posX, posY, posZ, name, "X", (int)(Math.random() * ModSettings.ENCHANT_COLORS.length));
+    	int color = ModConfig.waypointColorXaeroMinimap == -1? (int)(Math.random() * ModSettings.ENCHANT_COLORS.length): ModConfig.waypointColorXaeroMinimap;
+        Waypoint wp = new Waypoint(posX, posY, posZ, name, ModConfig.waypointSymbolXaeroMinimap, color);
         Minimap.waypoints.list.add(wp);
         try {
           XaeroMinimap.settings.saveWaypoints(Minimap.getCurrentWorld());
