@@ -95,9 +95,9 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
             return WorldNameEnum.nether;
         else if (provider.dimensionId == 1)
             return WorldNameEnum.end;
-        else if (provider.getDimensionName().equals("Moon"))
+        else if (provider.getDimensionName().equals(StatCollector.translateToLocal("dimension.Moon.name")))
             return WorldNameEnum.moon;
-        else if (provider.getDimensionName().equals("Mars"))
+        else if (provider.getDimensionName().equals(StatCollector.translateToLocal("dimension.Mars.name")))
             return WorldNameEnum.mars;
         else
             //other worlds where GT veins don't generate
@@ -109,9 +109,9 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
         for (int y=GTOreLayerHelper.getMinOreLevel(worldName)-2;y<=GTOreLayerHelper.getMaxOreLevel(worldName);y++) {
             for (int dx=-2;dx<3;dx++)
                 for(int dz=-2;dz<3;dz++)
-                    if (world.getBlock(x+dx, y, z+dz).getUnlocalizedName().equals("gt.blockores")) {
-                        short meta = ((GT_TileEntity_Ores)world.getTileEntity(x+dx, y, z+dz)).mMetaData;
-                        //avoid counting the small_ores.
+                    if (world.getBlock(x+dx, y, z+dz).getUnlocalizedName().startsWith("gt.blockores")) {
+                    	short meta = ((GT_TileEntity_Ores)world.getTileEntity(x+dx, y, z+dz)).mMetaData;
+                    	//avoid counting the small_ores.
                         if (meta>=16000)
                             continue;
                         return y;
@@ -135,7 +135,7 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
         for(int dy=-2;dy<7;dy++)
             for(int dx=-4;dx<5;dx++)
                 for(int dz=-4;dz<5;dz++) {
-                    if (world.getBlock(x+dx, y, z+dz).getUnlocalizedName().equals("gt.blockores")) {
+                    if (world.getBlock(x+dx, y, z+dz).getUnlocalizedName().startsWith("gt.blockores")) {
                         short meta = ((GT_TileEntity_Ores)world.getTileEntity(x+dx, y, z+dz)).mMetaData;
                         if (meta>=16000)
                             continue;
