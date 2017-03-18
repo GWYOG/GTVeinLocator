@@ -88,12 +88,12 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
         return stack;    
     }
     
-    public WorldNameEnum getWorldNameEnum (WorldProvider provider) {
-        if (provider.dimensionId == 0)
+    public WorldNameEnum getWorldNameEnum(WorldProvider provider) {
+        if (ModConfig.overworldLikeDimensions.contains(provider.dimensionId))
             return WorldNameEnum.overworld;
-        else if (provider.dimensionId == -1)
+        else if (ModConfig.netherLikeDimensions.contains(provider.dimensionId))
             return WorldNameEnum.nether;
-        else if (provider.dimensionId == 1)
+        else if (ModConfig.endLikeDimensions.contains(provider.dimensionId))
             return WorldNameEnum.end;
         else if (provider.getDimensionName().equals(StatCollector.translateToLocal("dimension.Moon.name")))
             return WorldNameEnum.moon;

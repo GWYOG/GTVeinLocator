@@ -3,6 +3,11 @@ package pers.gwyog.gtveinlocator.config;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.Logger;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -47,6 +52,9 @@ public class ModConfig {
      public static boolean recipeAdvancedVeinLocatorDisabled;
      public static boolean recipeEliteVeinLocatorDisabled;
      public static boolean creativeTabIconCompass;
+     public static List<Integer> overworldLikeDimensions;
+     public static List<Integer> netherLikeDimensions;
+     public static List<Integer> endLikeDimensions;
      
      public ModConfig(FMLPreInitializationEvent event) {
          logger = event.getModLog();
@@ -66,6 +74,7 @@ public class ModConfig {
          config.addCustomCategoryComment("Loot Tweaks", "You can set if the locators would generate in the loot chests and the possibility to find them.\nTips: The basic name of the chests are: \n    mineshaftCorridor, pyramidDesertyChest, pyramidJungleChest, pyramidJungleDispenser \n    strongholdCorridor, strongholdLibrary, strongholdCrossing, villageBlacksmith \n    bonusChest, dungeonChest \nNote: If you want to make specific locator appear in multiple kinds of loot-chests, you should use MineTweaker.");
          config.addCustomCategoryComment("Recipe Disabled", "You can disable the recipe of specific locator here.");
          config.addCustomCategoryComment("Creative Tab Icon", "For those whose client crashes everytime switching to GTVL's creative tab, you can now change the icon to minecraft's compass to avoid crashing.");
+         config.addCustomCategoryComment("Dimension White List", "Elite locator will only function in these dimensions and GalactiCraft's planets. This catagory aims mainly at compatibility for bukkit plugins like Multiverse-Core.");
          
          //locator enabled
          String veinLocatorEnabledDes = "Set to false will disable the basic vein locator in-game which means you won't see it any more.";
@@ -181,6 +190,14 @@ public class ModConfig {
          //creative tab icon
          String creativeTabCompassDes = "Set this to true will set GTVL's creative icon to minecraft's compass";
          creativeTabIconCompass = config.get("Creative Tab Icon", "creativeTabIconCompass", false, creativeTabCompassDes).getBoolean();
+         
+         //dimension white list
+         String overworldLikeDimensionsDes = "This list of dimension ids for overworld-like dimensions which elite vein locator should work in.";
+         String netherLikeDimensionsDes = "This list of dimension ids for nether-like dimensions which elite vein locator should work in.";
+         String endLikeDimensionsDes = "This list of dimension ids for end-like dimensions which elite vein locator should work in.";         
+         overworldLikeDimensions = Arrays.asList(ArrayUtils.toObject(config.get("Dimension White List", "overworldLikeDimensionWhitelist", new int[]{0}, overworldLikeDimensionsDes).getIntList()));
+         netherLikeDimensions = Arrays.asList(ArrayUtils.toObject(config.get("Dimension White List", "netherLikeDimensionWhitelist", new int[]{-1}, netherLikeDimensionsDes).getIntList()));
+         endLikeDimensions = Arrays.asList(ArrayUtils.toObject(config.get("Dimension White List", "endLikeDimensionWhitelist", new int[]{1}, endLikeDimensionsDes).getIntList()));
          
          config.save();        
          logger.info("Finished loading config.");
