@@ -17,21 +17,21 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
         new ModConfig(e);
         ModItems.init();
-        ModItems.registerItems();
         ModLoots.init();
         new GTVLNetwork();
     }
     
     public void init(FMLInitializationEvent e) {
-
+    	// we put it here just in case gt6's hv sensor has not been set in the preInit period
+        GTVeinLocator.gtModHelper.registerItems();
     }
 
     public void postInit(FMLPostInitializationEvent e) {
         
     }
     
-       public void onServerStart(FMLServerStartedEvent e) {
-           GTOreLayerHelper.init();
-       }
+    public void onServerStart(FMLServerStartedEvent e) {
+        GTOreLayerHelper.init();
+    }
 }
 

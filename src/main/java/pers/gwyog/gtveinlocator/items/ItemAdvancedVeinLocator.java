@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.Collection;
 
 import ic2.api.item.ElectricItem;
-import gregtech.common.blocks.GT_TileEntity_Ores;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;

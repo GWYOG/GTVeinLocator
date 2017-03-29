@@ -55,6 +55,14 @@ gtveinlocator.ore.mix.lapis=Lapis
 gtveinlocator.ore.mix.beryllium=Beryllium
 gtveinlocator.ore.mix.oilsand=Oilsand
 
+#additional vein names for gt6
+gtveinlocator.ore.mix.adamantium=Adamantium
+gtveinlocator.ore.mix.iodinesalt=Iodinesalt
+gtveinlocator.ore.mix.rocksalt=Rocksalt
+gtveinlocator.ore.mix.asbestos=Asbestos
+gtveinlocator.ore.mix.titanium=Titanium
+gtveinlocator.ore.mix.garnet=Garnet
+gtveinlocator.ore.mix.dolamide=Dolamide
 
 #creative tab
 itemGroup.GTVeinLocator=GregTech Vein-Locator

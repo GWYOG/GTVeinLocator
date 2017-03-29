@@ -69,10 +69,10 @@ public class ItemVeinLocator extends ItemLocatorBase {
     }
     
     protected int getClosestIndex(double var1) {
-        return (int)(var1>=8?Math.round((var1-24)/48):Math.round((var1-40)/48));
+        return GTVeinLocator.gtModHelper.getClosestIndex(var1);
     }
     
     protected int getCoordinateFromIndex(int index) {
-        return index>=0?(24+48*index):(40+48*index);
+        return GTVeinLocator.gtModHelper.getCoordinateFromIndex(index);
     }
 }

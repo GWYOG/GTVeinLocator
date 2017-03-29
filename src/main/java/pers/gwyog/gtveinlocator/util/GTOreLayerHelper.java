@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import gregtech.common.GT_Worldgen_GT_Ore_Layer;
 import net.minecraftforge.client.model.AdvancedModelLoader;
+import pers.gwyog.gtveinlocator.GTVeinLocator;
 
 public class GTOreLayerHelper {
     public static boolean basicSupport = true;
@@ -32,74 +32,8 @@ public class GTOreLayerHelper {
     }
     
     public static void init() {
-        // in case that the user is using old version of GT
-        Class clazzGTOreLayer = null;
-        try {
-            clazzGTOreLayer = Class.forName("gregtech.common.GT_Worldgen_GT_Ore_Layer");
-            Field fieldOverworld= clazzGTOreLayer.getField("mOverworld");
-            Field fieldNether = clazzGTOreLayer.getField("mNether");
-            Field fieldEnd = clazzGTOreLayer.getField("mEnd");
-            Field fieldEnabled = clazzGTOreLayer.getField("mEnabled");
-            Field fieldPrimaryMeta = clazzGTOreLayer.getField("mPrimaryMeta");
-            Field fieldSecondaryMeta = clazzGTOreLayer.getField("mSecondaryMeta");
-            Field fieldBetweenMeta = clazzGTOreLayer.getField("mBetweenMeta");
-            Field fieldSporadicMeta = clazzGTOreLayer.getField("mSporadicMeta");
-            Field fieldName = clazzGTOreLayer.getField("mWorldGenName");
-            Field fieldList = clazzGTOreLayer.getField("sList");
-        } catch (Exception e) {
-            basicSupport = false;
-        } 
-        if (clazzGTOreLayer != null && clazzGTOreLayer != null) 
-            try {
-                Field fieldMoon = clazzGTOreLayer.getField("mMoon");
-                Field fieldMars = clazzGTOreLayer.getField("mMars");
-            } catch (Exception e) {
-                gcSupport = false;
-            }
-        
-        // initialization starts
-        if (basicSupport) {
-            GTVeinNameHelper.registerVeinName("gtveinlocator.ore.mix.empty");
-            GTVeinNameHelper.registerVeinName("gtveinlocator.ore.mix.unknown");
-            for (GT_Worldgen_GT_Ore_Layer worldGen : GT_Worldgen_GT_Ore_Layer.sList) {
-                if (worldGen.mEnabled) {
-                    GTVeinNameHelper.registerVeinName("gtveinlocator." + worldGen.mWorldGenName);
-                    List<Short> componentList = new LinkedList<Short>();
-                    componentList.add(worldGen.mPrimaryMeta);
-                    componentList.add(worldGen.mSecondaryMeta);
-                    componentList.add(worldGen.mBetweenMeta);
-                    componentList.add(worldGen.mSporadicMeta);
-                    if (worldGen.mOverworld) {
-                        mapGTOverworldOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName);
-                        minLevelOreOverworld = worldGen.mMinY<minLevelOreOverworld? worldGen.mMinY: minLevelOreOverworld;
-                        maxLevelOreOverworld = worldGen.mMaxY>maxLevelOreOverworld? worldGen.mMaxY: maxLevelOreOverworld;
-                    }
-                    if (worldGen.mNether) {
-                        mapGTNetherOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName);
-                        minLevelOreNether = worldGen.mMinY<minLevelOreNether? worldGen.mMinY: minLevelOreNether;
-                        maxLevelOreNether = worldGen.mMaxY>maxLevelOreNether? worldGen.mMaxY: maxLevelOreNether;
-                    }
-                    if (worldGen.mEnd) {
-                        mapGTEndOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName);
-                        minLevelOreEnd = worldGen.mMinY<minLevelOreEnd? worldGen.mMinY: minLevelOreEnd;
-                        maxLevelOreEnd = worldGen.mMaxY>maxLevelOreEnd? worldGen.mMaxY: maxLevelOreEnd;
-                    }
-                    if (gcSupport) {
-                        if (worldGen.mMoon) {
-                            mapGTMoonOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName); 
-                            minLevelOreMoon = worldGen.mMinY<minLevelOreMoon? worldGen.mMinY: minLevelOreMoon;
-                            maxLevelOreMoon = worldGen.mMaxY>maxLevelOreMoon? worldGen.mMaxY: maxLevelOreMoon;
-                        }
-                        if (worldGen.mMars) {
-                            mapGTMarsOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName); 
-                            minLevelOreMars = worldGen.mMinY<minLevelOreMars? worldGen.mMinY: minLevelOreMars;
-                            maxLevelOreMars = worldGen.mMaxY>maxLevelOreMars? worldGen.mMaxY: maxLevelOreMars;
-                        }
-                    }
-                }
-            }
-        }
-    }
+        GTVeinLocator.gtModHelper.initGTOreLayerHelper();
+    } 
     
     public static short getMinOreLevel(WorldNameEnum worldName) {
         switch (worldName) {

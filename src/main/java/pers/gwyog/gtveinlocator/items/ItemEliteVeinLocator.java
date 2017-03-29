@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import gregtech.common.blocks.GT_TileEntity_Ores;
 import ic2.api.item.ElectricItem;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
@@ -21,6 +20,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
+import pers.gwyog.gtveinlocator.GTVeinLocator;
 import pers.gwyog.gtveinlocator.compat.JourneyMapHelper;
 import pers.gwyog.gtveinlocator.compat.LoadedModHelper;
 import pers.gwyog.gtveinlocator.compat.XaeroMinimapHelper;
@@ -108,14 +108,15 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
         WorldNameEnum worldName = getWorldNameEnum(world.provider);
         for (int y=GTOreLayerHelper.getMinOreLevel(worldName)-2;y<=GTOreLayerHelper.getMaxOreLevel(worldName);y++) {
             for (int dx=-2;dx<3;dx++)
-                for(int dz=-2;dz<3;dz++)
-                    if (world.getBlock(x+dx, y, z+dz).getUnlocalizedName().startsWith("gt.blockores")) {
-                    	short meta = ((GT_TileEntity_Ores)world.getTileEntity(x+dx, y, z+dz)).mMetaData;
-                    	//avoid counting the small_ores.
-                        if (meta>=16000)
+                for(int dz=-2;dz<3;dz++) {
+                    if (GTVeinLocator.gtModHelper.isGTBlockOre(world, x+dx, y, z+dz)) {
+                    	short meta = GTVeinLocator.gtModHelper.getGTOreMeta(world, x+dx, y, z+dz);
+                        meta = GTVeinLocator.gtModHelper.getValidMeta(meta);
+                    	if (meta == -1)
                             continue;
                         return y;
                     }
+                }
             if (world.canBlockSeeTheSky(x, y, z)) 
                 break;
         }
@@ -135,11 +136,11 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
         for(int dy=-2;dy<7;dy++)
             for(int dx=-4;dx<5;dx++)
                 for(int dz=-4;dz<5;dz++) {
-                    if (world.getBlock(x+dx, y, z+dz).getUnlocalizedName().startsWith("gt.blockores")) {
-                        short meta = ((GT_TileEntity_Ores)world.getTileEntity(x+dx, y, z+dz)).mMetaData;
-                        if (meta>=16000)
+                    if (GTVeinLocator.gtModHelper.isGTBlockOre(world, x+dx, y, z+dz)) {
+                        short meta = GTVeinLocator.gtModHelper.getGTOreMeta(world, x+dx, y, z+dz);
+                        meta = GTVeinLocator.gtModHelper.getValidMeta(meta);
+                        if (meta == -1)
                             continue;
-                        meta = (short)(meta % 1000);
                         if (map.containsKey(meta)) 
                             map.put(meta, map.get(meta)+1);
                         else
