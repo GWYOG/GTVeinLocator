@@ -117,7 +117,7 @@ public class ItemEliteVeinLocator extends ItemAdvancedVeinLocator {
                         return y;
                     }
                 }
-            if (world.canBlockSeeTheSky(x, y, z)) 
+            if (world.canBlockSeeTheSky(x, y-5, z)) 
                 break;
         }
         return -1;
