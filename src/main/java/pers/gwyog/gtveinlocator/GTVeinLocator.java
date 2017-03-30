@@ -27,7 +27,7 @@ import pers.gwyog.gtveinlocator.util.GTOreLayerHelper;
 public class GTVeinLocator {    
     public static final String MODID = "gtveinlocator";
     public static final String MODNAME = "GT Vein-Locator";
-    public static final String VERSION = "v1.0.5";
+    public static final String VERSION = "v1.0.6";
     public static IGTModHelper gtModHelper; 
     
     // default is GT5, it will become "GT6" when GT6 is installed
