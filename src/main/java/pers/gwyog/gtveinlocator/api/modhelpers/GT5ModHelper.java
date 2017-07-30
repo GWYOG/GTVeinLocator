@@ -156,12 +156,12 @@ public class GT5ModHelper implements IGTModHelper {
 
 	@Override
 	public int getClosestIndex(double var1) {
-        return (int)(var1>=8?Math.round((var1-24)/48):Math.round((var1-40)/48));
+        return (int)(var1<8&&ModConfig.matchMisplacement?Math.round((var1-40)/48):Math.round((var1-24)/48));
 	}
 
 	@Override
 	public int getCoordinateFromIndex(int index) {
-        return index>=0?(24+48*index):(40+48*index);
+        return index<0&&ModConfig.matchMisplacement?(40+48*index):(24+48*index);
 	}
 	
 	@Override

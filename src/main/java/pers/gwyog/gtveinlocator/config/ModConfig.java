@@ -55,6 +55,7 @@ public class ModConfig {
      public static List<Integer> overworldLikeDimensions;
      public static List<Integer> netherLikeDimensions;
      public static List<Integer> endLikeDimensions;
+     public static boolean matchMisplacement;
      
      public ModConfig(FMLPreInitializationEvent event) {
          logger = event.getModLog();
@@ -198,6 +199,10 @@ public class ModConfig {
          overworldLikeDimensions = Arrays.asList(ArrayUtils.toObject(config.get("Dimension White List", "overworldLikeDimensionWhitelist", new int[]{0}, overworldLikeDimensionsDes).getIntList()));
          netherLikeDimensions = Arrays.asList(ArrayUtils.toObject(config.get("Dimension White List", "netherLikeDimensionWhitelist", new int[]{-1}, netherLikeDimensionsDes).getIntList()));
          endLikeDimensions = Arrays.asList(ArrayUtils.toObject(config.get("Dimension White List", "endLikeDimensionWhitelist", new int[]{1}, endLikeDimensionsDes).getIntList()));
+         
+         //misc
+         String matchMisplacementDes = "Set this to true to match the vein location misplacement issue before GT5.09.29";
+         matchMisplacement = config.get("Match Misplacement", "matchMisplacement", false, matchMisplacementDes).getBoolean();
          
          config.save();        
          logger.info("Finished loading config.");
