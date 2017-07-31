@@ -128,6 +128,8 @@ public class ModConfig {
          eliteVeinLocatorTier = getSafeIntFromProperty(propertyEliteVeinLocatorTier, 1, Integer.MAX_VALUE);
          Property propertyEliteVeinLocatorSingleUseCost = config.get("Locator Data", "eliteVeinLocatorSingleUseCost", 64000.0D, eliteVeinLocatorSingleUseCostDes);
          eliteVeinLocatorSingleUseCost = getSafeDoubleFromProperty(propertyEliteVeinLocatorSingleUseCost, 0.0D, eliteVeinLocatorMaxCharge);
+         String matchMisplacementDes = "Set this to true to match the vein location misplacement issue before GT5.09.29";
+         matchMisplacement = config.get("Locator Data", "matchMisplacement", false, matchMisplacementDes).getBoolean();
     
          
          //compatibility
@@ -199,10 +201,6 @@ public class ModConfig {
          overworldLikeDimensions = Arrays.asList(ArrayUtils.toObject(config.get("Dimension White List", "overworldLikeDimensionWhitelist", new int[]{0}, overworldLikeDimensionsDes).getIntList()));
          netherLikeDimensions = Arrays.asList(ArrayUtils.toObject(config.get("Dimension White List", "netherLikeDimensionWhitelist", new int[]{-1}, netherLikeDimensionsDes).getIntList()));
          endLikeDimensions = Arrays.asList(ArrayUtils.toObject(config.get("Dimension White List", "endLikeDimensionWhitelist", new int[]{1}, endLikeDimensionsDes).getIntList()));
-         
-         //misc
-         String matchMisplacementDes = "Set this to true to match the vein location misplacement issue before GT5.09.29";
-         matchMisplacement = config.get("Match Misplacement", "matchMisplacement", false, matchMisplacementDes).getBoolean();
          
          config.save();        
          logger.info("Finished loading config.");
