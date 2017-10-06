@@ -11,7 +11,8 @@ import gregapi.data.IL;
 import gregapi.data.MT;
 import gregapi.data.OP;
 import gregapi.util.UT;
-import gregapi.worldgen.Worldgen_GT_Ore_Layer;
+import gregapi.worldgen.GT6WorldGenerator;
+import gregapi.worldgen.WorldgenOresLarge;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import pers.gwyog.gtveinlocator.ModItems;
@@ -63,9 +64,9 @@ public class GT6ModHelper implements IGTModHelper {
         if (ClientVeinNameHelper.basicSupport) {
             GTVeinNameHelper.registerVeinName("gtveinlocator.ore.mix.empty");
             GTVeinNameHelper.registerVeinName("gtveinlocator.ore.mix.unknown");
-            for (Worldgen_GT_Ore_Layer worldGen : Worldgen_GT_Ore_Layer.sList)
+            for (WorldgenOresLarge worldGen : WorldgenOresLarge.sList)
                 if (worldGen.mEnabled) 
-                    GTVeinNameHelper.registerVeinName("gtveinlocator." + worldGen.mWorldGenName);
+                    GTVeinNameHelper.registerVeinName("gtveinlocator." + worldGen.mName.replace("large", "mix"));
         }
 	}
 
@@ -78,30 +79,51 @@ public class GT6ModHelper implements IGTModHelper {
         if (GTOreLayerHelper.basicSupport) {
             GTVeinNameHelper.registerVeinName("gtveinlocator.ore.mix.empty");
             GTVeinNameHelper.registerVeinName("gtveinlocator.ore.mix.unknown");
-            for (Worldgen_GT_Ore_Layer worldGen : Worldgen_GT_Ore_Layer.sList) {
+            
+            List<WorldgenOresLarge> listOverworld =  GT6WorldGenerator.PFAA ? CS.ORE_PFAA : CS.ORE_OVERWORLD;
+            List<WorldgenOresLarge> listNether = CS.ORE_NETHER;
+            List<WorldgenOresLarge> listEnd = CS.ORE_END;
+            
+            for (WorldgenOresLarge worldGen : listOverworld) {
                 if (worldGen.mEnabled) {
-                    GTVeinNameHelper.registerVeinName("gtveinlocator." + worldGen.mWorldGenName);
+                    GTVeinNameHelper.registerVeinName("gtveinlocator." + worldGen.mName.replace("large", "mix"));
                     List<Short> componentList = new LinkedList<Short>();
-                    componentList.add(worldGen.mPrimaryMeta);
-                    componentList.add(worldGen.mSecondaryMeta);
-                    componentList.add(worldGen.mBetweenMeta);
-                    componentList.add(worldGen.mSporadicMeta);
-                    if (worldGen.mOverworld) {
-                    	GTOreLayerHelper.mapGTOverworldOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName);
-                    	GTOreLayerHelper.minLevelOreOverworld = worldGen.mMinY<GTOreLayerHelper.minLevelOreOverworld? worldGen.mMinY: GTOreLayerHelper.minLevelOreOverworld;
-                    	GTOreLayerHelper.maxLevelOreOverworld = worldGen.mMaxY>GTOreLayerHelper.maxLevelOreOverworld? worldGen.mMaxY: GTOreLayerHelper.maxLevelOreOverworld;
-                    }
-                    if (worldGen.mNether) {
-                    	GTOreLayerHelper.mapGTNetherOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName);
-                    	GTOreLayerHelper.minLevelOreNether = worldGen.mMinY<GTOreLayerHelper.minLevelOreNether? worldGen.mMinY: GTOreLayerHelper.minLevelOreNether;
-                    	GTOreLayerHelper.maxLevelOreNether = worldGen.mMaxY>GTOreLayerHelper.maxLevelOreNether? worldGen.mMaxY: GTOreLayerHelper.maxLevelOreNether;
-                    }
-                    if (worldGen.mEnd) {
-                    	GTOreLayerHelper.mapGTEndOreLayer.put(componentList, "gtveinlocator." + worldGen.mWorldGenName);
-                    	GTOreLayerHelper.minLevelOreEnd = worldGen.mMinY<GTOreLayerHelper.minLevelOreEnd? worldGen.mMinY: GTOreLayerHelper.minLevelOreEnd;
-                    	GTOreLayerHelper.maxLevelOreEnd = worldGen.mMaxY>GTOreLayerHelper.maxLevelOreEnd? worldGen.mMaxY: GTOreLayerHelper.maxLevelOreEnd;
-                    }
+                    componentList.add(worldGen.mTop.mID);
+                    componentList.add(worldGen.mBottom.mID);
+                    componentList.add(worldGen.mBetween.mID);
+                    componentList.add(worldGen.mSpread.mID);
+                    GTOreLayerHelper.mapGTOverworldOreLayer.put(componentList, "gtveinlocator." + worldGen.mName.replace("large", "mix"));
+                    GTOreLayerHelper.minLevelOreOverworld = worldGen.mMinY<GTOreLayerHelper.minLevelOreOverworld? worldGen.mMinY: GTOreLayerHelper.minLevelOreOverworld;
+                    GTOreLayerHelper.maxLevelOreOverworld = worldGen.mMaxY>GTOreLayerHelper.maxLevelOreOverworld? worldGen.mMaxY: GTOreLayerHelper.maxLevelOreOverworld;
                 }
+            }
+                
+            for (WorldgenOresLarge worldGen : listNether) {
+                if (worldGen.mEnabled) {
+                    GTVeinNameHelper.registerVeinName("gtveinlocator." + worldGen.mName.replace("large", "mix"));
+                    List<Short> componentList = new LinkedList<Short>();
+                    componentList.add(worldGen.mTop.mID);
+                    componentList.add(worldGen.mBottom.mID);
+                    componentList.add(worldGen.mBetween.mID);
+                    componentList.add(worldGen.mSpread.mID);
+                    GTOreLayerHelper.mapGTNetherOreLayer.put(componentList, "gtveinlocator." + worldGen.mName.replace("large", "mix"));
+                    GTOreLayerHelper.minLevelOreNether = worldGen.mMinY<GTOreLayerHelper.minLevelOreNether? worldGen.mMinY: GTOreLayerHelper.minLevelOreNether;
+                    GTOreLayerHelper.maxLevelOreNether = worldGen.mMaxY>GTOreLayerHelper.maxLevelOreNether? worldGen.mMaxY: GTOreLayerHelper.maxLevelOreNether;
+                }
+            }
+            
+            for (WorldgenOresLarge worldGen : listEnd) {
+                if (worldGen.mEnabled) {
+                    GTVeinNameHelper.registerVeinName("gtveinlocator." + worldGen.mName.replace("large", "mix"));
+                    List<Short> componentList = new LinkedList<Short>();
+                    componentList.add(worldGen.mTop.mID);
+                    componentList.add(worldGen.mBottom.mID);
+                    componentList.add(worldGen.mBetween.mID);
+                    componentList.add(worldGen.mSpread.mID);
+                    GTOreLayerHelper.mapGTEndOreLayer.put(componentList, "gtveinlocator." + worldGen.mName.replace("large", "mix"));
+                    GTOreLayerHelper.minLevelOreEnd = worldGen.mMinY<GTOreLayerHelper.minLevelOreEnd? worldGen.mMinY: GTOreLayerHelper.minLevelOreEnd;
+                    GTOreLayerHelper.maxLevelOreEnd = worldGen.mMaxY>GTOreLayerHelper.maxLevelOreEnd? worldGen.mMaxY: GTOreLayerHelper.maxLevelOreEnd;
+              }
             }
         }
 		
